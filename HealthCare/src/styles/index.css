@@ -1,68 +1,214 @@
-:root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
+/* Global Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Arial', sans-serif;
 }
 
 body {
-  margin: 0;
+  background-color: #f4f4f9;
+  color: #333;
+  line-height: 1.6;
+}
+
+/* Header Section with Motivational Health Quotes and Login */
+.header {
+  position: relative;
+  background: url('https://img.freepik.com/free-vector/network-mesh-wire-digital-technology-background_1017-27428.jpg?t=st=1737877092~exp=1737880692~hmac=4b88e3e9ecf1ff3473467ca74349e29df3172fe05841482aeb2b7a8e06c4eb91&w=2000') no-repeat center center/cover; /* Health-related background */
+  height: 100vh;
+  color: white;
+  text-align: center;
+  padding: 100px 0;
+}
+
+.overlay {
+  background: rgba(0, 0, 0, 0.5);
+  height: 100%;
   display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+.header h1 {
+  font-size: 3.5rem;
+  margin-bottom: 10px;
 }
 
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
+.quote-slider {
+  margin-top: 20px;
+  font-size: 1.4rem;
+  font-style: italic;
+}
+
+.quote-slider p {
+  margin-bottom: 10px;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.quote-btn {
+  background-color: transparent;
+  border: none;
+  color: white;
+  font-size: 1.5rem;
   cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+  transition: color 0.3s ease;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
+.quote-btn:hover {
+  color: #ff9800;
+}
+
+/* Login Section within Header */
+.login-section {
+  margin-top: 40px;
+}
+
+.login-section h2 {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+  color: #fff;
+}
+
+.login-buttons button {
+  background-color: #007f5f;
+  color: #fff;
+  border: none;
+  padding: 15px 30px;
+  margin: 10px;
+  font-size: 1.2rem;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.login-buttons button:hover {
+  background-color: #005f73;
+}
+
+.admin-btn {
+  background-color: #ff9800;
+}
+
+.admin-btn:hover {
+  background-color: #e68900;
+}
+
+.doctor-btn {
+  background-color: #03a9f4;
+}
+
+.doctor-btn:hover {
+  background-color: #0288d1;
+}
+
+.patient-btn {
+  background-color: #4caf50;
+}
+
+.patient-btn:hover {
+  background-color: #388e3c;
+}
+
+.info-text {
+  font-size: 1.1rem;
+  color: #fff;
+  margin-top: 20px;
+}
+
+/* Introduction Section */
+.intro {
+  background-color: #fff;
+  padding: 40px 0;
+  text-align: center;
+}
+
+.intro h2 {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+}
+
+.intro p {
+  font-size: 1.2rem;
+  max-width: 800px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* Footer Section */
+.footer {
+  background-color: #333;
+  color: #fff;
+  padding: 40px 0;
+}
+
+.footer-info {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 30px;
+}
+
+.footer-contact,
+.footer-social {
+  width: 45%;
+}
+
+.footer h4 {
+  font-size: 1.3rem;
+  margin-bottom: 10px;
+}
+
+.footer p {
+  font-size: 1rem;
+  margin-bottom: 5px;
+}
+
+.footer-social ul {
+  list-style-type: none;
+}
+
+.footer-social li {
+  margin-bottom: 10px;
+}
+
+.footer-social a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 1rem;
+  transition: color 0.3s ease;
+}
+
+.footer-social a:hover {
+  color: #03a9f4;
+}
+
+.footer-bottom {
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .footer-info {
+      flex-direction: column;
+      align-items: center;
   }
-  a:hover {
-    color: #747bff;
+
+  .footer-contact,
+  .footer-social {
+      width: 100%;
+      text-align: center;
   }
-  button {
-    background-color: #f9f9f9;
+
+  .login-buttons {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+  }
+
+  .login-buttons button {
+      width: 80%;
+      margin: 10px 0;
   }
 }
