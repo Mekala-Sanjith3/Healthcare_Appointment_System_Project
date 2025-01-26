@@ -1,210 +1,290 @@
-/* HomePage.css */
+/* Global Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-/* General Styles */
-body, html {
-    margin: 0;
-    padding: 0;
-    font-family: 'Arial', sans-serif;
-    box-sizing: border-box;
-  }
-  
-  /* Header */
-  .hero-header {
-    background: #004aad;
-    color: white;
-    padding: 1rem 0;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-  
-  .hero-header .container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 90%;
-    margin: 0 auto;
-  }
-  
-  .hero-header .logo {
-    font-size: 1.5rem;
-    font-weight: bold;
-  }
-  
-  .hero-header .logo .highlight {
-    color: #f39c12;
-  }
-  
-  .hero-header .navbar a {
-    color: white;
-    text-decoration: none;
-    margin-left: 1rem;
-    font-size: 1rem;
-  }
-  
-  .hero-header .navbar a:hover {
-    text-decoration: underline;
-  }
-  
-  /* Hero Section */
-  .hero-section {
-    background: linear-gradient(to right, #004aad, #0f81d8);
-    color: white;
-    text-align: center;
-    padding: 5rem 0;
-  }
-  
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f7f9fc;
+}
+
+/* Full Width */
+.container {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* Hero Header */
+.hero-header {
+  background: #004aad;
+  color: white;
+  padding: 1rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.hero-header .logo {
+  font-size: 2rem;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+}
+
+.hero-header .logo i {
+  margin-right: 0.5rem;
+}
+
+.hero-header .navbar a {
+  color: white;
+  text-decoration: none;
+  margin-left: 1.5rem;
+  font-size: 1.1rem;
+  transition: color 0.3s ease;
+}
+
+.hero-header .navbar a:hover {
+  text-decoration: underline;
+  color: #f39c12;
+}
+
+/* Hero Section */
+.hero-section {
+  background: linear-gradient(to right, #004aad, #0f81d8);
+  color: white;
+  text-align: center;
+  padding: 6rem 2rem;
+  width: 100%;
+}
+
+.hero-section .hero-content h1 {
+  font-size: 3rem;
+  margin-bottom: 1.5rem;
+}
+
+.hero-section .hero-content p {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+}
+
+.hero-section .btn-primary {
+  background: #f39c12;
+  color: white;
+  padding: 1rem 2rem;
+  font-size: 1.2rem;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.3s ease;
+}
+
+.hero-section .btn-primary:hover {
+  background: #e67e22;
+}
+
+/* Login Section */
+.login-section {
+  background: #f7f9fc;
+  padding: 4rem 2rem;
+  text-align: center;
+}
+
+.login-section h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.login-section p {
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+}
+
+.login-cards {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+.login-card {
+  background: white;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  border-radius: 0.5rem;
+  width: 280px;
+  padding: 2rem;
+  margin: 1rem;
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+
+.login-card:hover {
+  transform: translateY(-10px);
+}
+
+.login-card i {
+  font-size: 3rem;
+  color: #004aad;
+  margin-bottom: 1.5rem;
+}
+
+.login-card h3 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.login-card .btn-login {
+  background: #004aad;
+  color: white;
+  padding: 1rem 2rem;
+  font-size: 1.1rem;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.login-card .btn-login:hover {
+  background: #00327c;
+}
+
+/* Services Section */
+.services-section {
+  background: white;
+  padding: 4rem 2rem;
+  text-align: center;
+  width: 100%;
+}
+
+.services-section h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.services-section p {
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+  color: #666;
+}
+
+.services-section .services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+}
+
+.service {
+  text-align: center;
+  padding: 2rem;
+  border: 1px solid #ddd;
+  border-radius: 0.5rem;
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+  background: #f9f9f9;
+}
+
+.service:hover {
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+  transform: translateY(-10px);
+}
+
+.service i {
+  font-size: 3rem;
+  color: #004aad;
+  margin-bottom: 1.5rem;
+}
+
+.service h3 {
+  font-size: 1.7rem;
+  margin-bottom: 1rem;
+}
+
+.service p {
+  font-size: 1.1rem;
+  color: #666;
+}
+
+/* Footer Section */
+.footer {
+  background: #004aad;
+  color: white;
+  text-align: center;
+  padding: 3rem 2rem;
+  width: 100%;
+}
+
+.footer .footer-logo {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.footer .footer-logo i {
+  margin-right: 0.5rem;
+}
+
+.footer .footer-links a {
+  color: white;
+  text-decoration: none;
+  margin: 0 1rem;
+  transition: color 0.3s ease;
+}
+
+.footer .footer-links a:hover {
+  text-decoration: underline;
+}
+
+.footer p {
+  font-size: 1rem;
+  margin-top: 1rem;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
   .hero-section .hero-content h1 {
     font-size: 2.5rem;
-    margin-bottom: 1rem;
   }
-  
-  .hero-section .hero-content p {
-    font-size: 1.2rem;
-    margin-bottom: 2rem;
+
+  .login-cards {
+    flex-direction: column;
+    align-items: center;
   }
-  
-  .hero-section .btn-primary {
-    background: #f39c12;
-    color: white;
-    padding: 0.8rem 1.5rem;
-    font-size: 1rem;
-    border: none;
-    border-radius: 0.5rem;
-    cursor: pointer;
-    text-decoration: none;
-  }
-  
-  .hero-section .btn-primary:hover {
-    background: #e67e22;
-  }
-  
-  /* Login Section */
-  .login-section {
-    background: #f7f9fc;
-    padding: 3rem 0;
-    text-align: center;
-  }
-  
-  .login-section h2 {
-    font-size: 2rem;
-    margin-bottom: 1rem;
-  }
-  
-  .login-section .login-cards {
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
-  }
-  
-  .login-card {
-    background: white;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    border-radius: 0.5rem;
-    width: 300px;
-    padding: 1.5rem;
-    margin: 1rem;
-    text-align: center;
-  }
-  
-  .login-card i {
-    font-size: 2.5rem;
-    color: #004aad;
-    margin-bottom: 1rem;
-  }
-  
-  .login-card h3 {
-    font-size: 1.5rem;
-    margin-bottom: 0.5rem;
-  }
-  
-  .login-card p {
-    font-size: 1rem;
-    margin-bottom: 1rem;
-    color: #666;
-  }
-  
-  .login-card .btn-login {
-    background: #004aad;
-    color: white;
-    padding: 0.8rem 1.5rem;
-    font-size: 1rem;
-    border: none;
-    border-radius: 0.5rem;
-    cursor: pointer;
-  }
-  
-  .login-card .btn-login:hover {
-    background: #00327c;
-  }
-  
-  /* Services Section */
-  .services-section {
-    background: white;
-    padding: 3rem 0;
-    text-align: center;
-  }
-  
-  .services-section h2 {
-    font-size: 2rem;
-    margin-bottom: 1rem;
-  }
-  
+
   .services-section .services-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 1.5rem;
-    padding: 1rem;
+    grid-template-columns: 1fr;
   }
-  
-  .service {
-    text-align: center;
-    padding: 1.5rem;
-    border: 1px solid #ddd;
-    border-radius: 0.5rem;
-    transition: box-shadow 0.3s ease;
-  }
-  
-  .service:hover {
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-  }
-  
-  .service i {
-    font-size: 2.5rem;
-    color: #004aad;
-    margin-bottom: 1rem;
-  }
-  
-  .service h3 {
-    font-size: 1.5rem;
-    margin-bottom: 0.5rem;
-  }
-  
-  .service p {
-    font-size: 1rem;
-    color: #666;
-  }
-  
-  /* Footer */
+
   .footer {
-    background: #004aad;
-    color: white;
-    text-align: center;
-    padding: 2rem 0;
+    padding: 2rem 1rem;
   }
-  
+
+  .hero-header {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+  }
+
+  .hero-header .navbar a {
+    margin-left: 0;
+    margin-top: 1rem;
+    font-size: 1.2rem;
+  }
+
+  .login-card {
+    width: 100%;
+  }
+
   .footer .footer-logo {
     font-size: 1.5rem;
-    font-weight: bold;
   }
-  
-  .footer .footer-links a {
-    color: white;
-    text-decoration: none;
-    margin: 0 0.5rem;
-  }
-  
-  .footer .footer-links a:hover {
-    text-decoration: underline;
-  }
-  
+}

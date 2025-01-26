@@ -1,5 +1,5 @@
 import React from "react";
-import "../styles/HomePage.css";
+import "../../styles/css-pages/HomePage.css";
 
 const HomePage = () => {
   return (
@@ -69,12 +69,56 @@ const HomePage = () => {
           <p>Explore the range of services we offer to make healthcare simple and accessible for you.</p>
           <div className="services-grid">
             {[
-              { icon: "fas fa-stethoscope", title: "Telemedicine", description: "Access consultations from home." },
-              { icon: "fas fa-calendar-check", title: "Appointment Scheduling", description: "Manage your appointments effortlessly." },
-              { icon: "fas fa-notes-medical", title: "Medical Records", description: "Securely store and access your history." },
-              { icon: "fas fa-hospital", title: "In-Clinic Visits", description: "Organize your in-person consultations easily." },
-              { icon: "fas fa-ambulance", title: "Emergency Services", description: "Quick response for urgent needs." },
-              { icon: "fas fa-heartbeat", title: "Health Monitoring", description: "Track your vitals and improve your health." },
+              {
+                icon: "fas fa-stethoscope",
+                title: "Telemedicine",
+                description: "Access consultations from home.",
+              },
+              {
+                icon: "fas fa-calendar-check",
+                title: "Appointment Scheduling",
+                description: "Manage your appointments effortlessly.",
+              },
+              {
+                icon: "fas fa-notes-medical",
+                title: "Medical Records",
+                description: "Securely store and access your history.",
+              },
+              {
+                icon: "fas fa-hospital",
+                title: "In-Clinic Visits",
+                description: "Organize your in-person consultations easily.",
+              },
+              {
+                icon: "fas fa-ambulance",
+                title: "Emergency Services",
+                description: "Quick response for urgent needs.",
+              },
+              {
+                icon: "fas fa-heartbeat",
+                title: "Health Monitoring",
+                description: "Track your vitals and improve your health.",
+              },
+              {
+                icon: "fas fa-pills",
+                title: "Pharmacy Services",
+                description: "Order and track medicines online.",
+              },
+              {
+                icon: "fas fa-dna",
+                title: "Lab Tests",
+                description: "Get diagnostic tests at your convenience.",
+              },
+              {
+                icon: "fas fa-wheelchair",
+                title: "Rehabilitation",
+                description: "Support for recovery and wellness.",
+              },
+              {
+                icon: "fas fa-user-nurse",
+                title: "Nursing Services",
+                description: "Professional care at your doorstep.",
+              },
             ].map((service, index) => (
               <div className="service" key={index}>
                 <i className={service.icon}></i>
