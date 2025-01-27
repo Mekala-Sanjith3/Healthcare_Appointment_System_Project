@@ -34,30 +34,24 @@ const HomePage = () => {
           <h2>Login to Your Portal</h2>
           <p>Access specialized features by logging into your respective portal.</p>
           <div className="login-cards">
-            {[
-              {
-                icon: "fas fa-user-shield",
-                title: "Admin Login",
-                description: "Manage the healthcare system, staff, and services with ease.",
-              },
-              {
-                icon: "fas fa-user-md",
-                title: "Doctor Login",
-                description: "View appointments, manage schedules, and access patient records.",
-              },
-              {
-                icon: "fas fa-user",
-                title: "Patient Login",
-                description: "Book appointments, access reports, and consult with doctors.",
-              },
-            ].map((type, index) => (
-              <div className="login-card" key={index}>
-                <i className={type.icon}></i>
-                <h3>{type.title}</h3>
-                <p>{type.description}</p>
-                <button className="btn-login">Log In as {type.title.split(" ")[0]}</button>
-              </div>
-            ))}
+            <div className="login-card">
+              <i className="fas fa-user-shield"></i>
+              <h3>Admin Login</h3>
+              <p>Manage the healthcare system, staff, and services with ease.</p>
+              <button className="btn-login">Log In as Admin</button>
+            </div>
+            <div className="login-card">
+              <i className="fas fa-user-md"></i>
+              <h3>Doctor Login</h3>
+              <p>View appointments, manage schedules, and access patient records.</p>
+              <button className="btn-login">Log In as Doctor</button>
+            </div>
+            <div className="login-card">
+              <i className="fas fa-user"></i>
+              <h3>Patient Login</h3>
+              <p>Book appointments, access reports, and consult with doctors.</p>
+              <button className="btn-login">Log In as Patient</button>
+            </div>
           </div>
         </div>
       </section>
@@ -68,64 +62,56 @@ const HomePage = () => {
           <h2>Our Services</h2>
           <p>Explore the range of services we offer to make healthcare simple and accessible for you.</p>
           <div className="services-grid">
-            {[
-              {
-                icon: "fas fa-stethoscope",
-                title: "Telemedicine",
-                description: "Access consultations from home.",
-              },
-              {
-                icon: "fas fa-calendar-check",
-                title: "Appointment Scheduling",
-                description: "Manage your appointments effortlessly.",
-              },
-              {
-                icon: "fas fa-notes-medical",
-                title: "Medical Records",
-                description: "Securely store and access your history.",
-              },
-              {
-                icon: "fas fa-hospital",
-                title: "In-Clinic Visits",
-                description: "Organize your in-person consultations easily.",
-              },
-              {
-                icon: "fas fa-ambulance",
-                title: "Emergency Services",
-                description: "Quick response for urgent needs.",
-              },
-              {
-                icon: "fas fa-heartbeat",
-                title: "Health Monitoring",
-                description: "Track your vitals and improve your health.",
-              },
-              {
-                icon: "fas fa-pills",
-                title: "Pharmacy Services",
-                description: "Order and track medicines online.",
-              },
-              {
-                icon: "fas fa-dna",
-                title: "Lab Tests",
-                description: "Get diagnostic tests at your convenience.",
-              },
-              {
-                icon: "fas fa-wheelchair",
-                title: "Rehabilitation",
-                description: "Support for recovery and wellness.",
-              },
-              {
-                icon: "fas fa-user-nurse",
-                title: "Nursing Services",
-                description: "Professional care at your doorstep.",
-              },
-            ].map((service, index) => (
-              <div className="service" key={index}>
-                <i className={service.icon}></i>
-                <h3>{service.title}</h3>
-                <p>{service.description}</p>
-              </div>
-            ))}
+            <div className="service">
+              <i className="fas fa-stethoscope"></i>
+              <h3>Telemedicine</h3>
+              <p>Access consultations from home.</p>
+            </div>
+            <div className="service">
+              <i className="fas fa-calendar-check"></i>
+              <h3>Appointment Scheduling</h3>
+              <p>Manage your appointments effortlessly.</p>
+            </div>
+            <div className="service">
+              <i className="fas fa-notes-medical"></i>
+              <h3>Medical Records</h3>
+              <p>Securely store and access your history.</p>
+            </div>
+            <div className="service">
+              <i className="fas fa-hospital"></i>
+              <h3>In-Clinic Visits</h3>
+              <p>Organize your in-person consultations easily.</p>
+            </div>
+            <div className="service">
+              <i className="fas fa-ambulance"></i>
+              <h3>Emergency Services</h3>
+              <p>Quick response for urgent needs.</p>
+            </div>
+            <div className="service">
+              <i className="fas fa-heartbeat"></i>
+              <h3>Health Monitoring</h3>
+              <p>Track your vitals and improve your health.</p>
+            </div>
+            <div className="service">
+              <i className="fas fa-user-nurse"></i>
+              <h3>Nursing Support</h3>
+              <p>Get professional care at your convenience.</p>
+            </div>
+            <div className="service">
+              <i className="fas fa-prescription"></i>
+              <h3>Pharmacy Access</h3>
+              <p>Order and refill prescriptions online.</p>
+            </div>
+            <div className="service">
+              <i className="fas fa-headset"></i>
+              <h3>24/7 Support</h3>
+              <p>Reach out anytime for assistance.</p>
+            </div>
+            <div className="service">
+              <i className="fas fa-diagnoses"></i>
+              <h3>Diagnostic Services</h3>
+              <p>Access lab results and diagnostics.</p>
+            </div>
           </div>
         </div>
       </section>

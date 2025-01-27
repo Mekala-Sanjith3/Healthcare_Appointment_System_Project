@@ -3,11 +3,7 @@ import HomePage from "./components/pages/HomePage";
 import './styles/App.css';  
 
 function App() {
-  return (
-    <div className="App">
-      <HomePage />
-    </div>
-  );
+  return <HomePage />;
 }
 
 export default App;
