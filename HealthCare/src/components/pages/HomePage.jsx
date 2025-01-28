@@ -112,6 +112,16 @@ const HomePage = () => {
               <h3>Diagnostic Services</h3>
               <p>Access lab results and diagnostics.</p>
             </div>
+            <div className="service">
+              <i className="fas fa-brain"></i>
+              <h3>Mental Health Care</h3>
+              <p>Professional counseling and mental wellness support.</p>
+            </div>
+            <div className="service">
+              <i className="fas fa-wheelchair"></i>
+              <h3>Rehabilitation Services</h3>
+              <p>Comprehensive physical therapy and rehabilitation.</p>
+            </div>
           </div>
         </div>
       </section>
