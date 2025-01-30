@@ -61,11 +61,89 @@ const HomePage = () => {
       </section>
 
       <section className="services-section" id="services">
-        {/* ... rest of your services section code ... */}
+        <div className="container">
+          <h2>Our Services</h2>
+          <p>Explore the range of services we offer to make healthcare simple and accessible for you.</p>
+          <div className="services-grid">
+            <div className="service">
+              <i className="fas fa-stethoscope"></i>
+              <h3>Telemedicine</h3>
+              <p>Access consultations from home.</p>
+            </div>
+            <div className="service">
+              <i className="fas fa-calendar-check"></i>
+              <h3>Appointment Scheduling</h3>
+              <p>Manage your appointments effortlessly.</p>
+            </div>
+            <div className="service">
+              <i className="fas fa-notes-medical"></i>
+              <h3>Medical Records</h3>
+              <p>Securely store and access your history.</p>
+            </div>
+            <div className="service">
+              <i className="fas fa-hospital"></i>
+              <h3>In-Clinic Visits</h3>
+              <p>Organize your in-person consultations easily.</p>
+            </div>
+            <div className="service">
+              <i className="fas fa-ambulance"></i>
+              <h3>Emergency Services</h3>
+              <p>Quick response for urgent needs.</p>
+            </div>
+            <div className="service">
+              <i className="fas fa-heartbeat"></i>
+              <h3>Health Monitoring</h3>
+              <p>Track your vitals and improve your health.</p>
+            </div>
+            <div className="service">
+              <i className="fas fa-user-nurse"></i>
+              <h3>Nursing Support</h3>
+              <p>Get professional care at your convenience.</p>
+            </div>
+            <div className="service">
+              <i className="fas fa-prescription"></i>
+              <h3>Pharmacy Access</h3>
+              <p>Order and refill prescriptions online.</p>
+            </div>
+            <div className="service">
+              <i className="fas fa-headset"></i>
+              <h3>24/7 Support</h3>
+              <p>Reach out anytime for assistance.</p>
+            </div>
+            <div className="service">
+              <i className="fas fa-diagnoses"></i>
+              <h3>Diagnostic Services</h3>
+              <p>Access lab results and diagnostics.</p>
+            </div>
+            <div className="service">
+              <i className="fas fa-brain"></i>
+              <h3>Mental Health Care</h3>
+              <p>Professional counseling and mental wellness support.</p>
+            </div>
+            <div className="service">
+              <i className="fas fa-wheelchair"></i>
+              <h3>Rehabilitation Services</h3>
+              <p>Comprehensive physical therapy and rehabilitation.</p>
+            </div>
+          </div>
+        </div>
       </section>
 
       <footer className="footer">
-        {/* ... rest of your footer code ... */}
+        <div className="container">
+          <div className="footer-content">
+            <div className="footer-logo">
+              <i className="fas fa-heartbeat"></i> HealthCare
+            </div>
+            <p>Your partner in ensuring a healthy future for everyone.</p>
+            <div className="footer-links">
+              <a href="#about">About Us</a>
+              <a href="#services">Services</a>
+              <a href="#contact">Contact</a>
+            </div>
+            <p>&copy; 2025 HealthCare System. All rights reserved.</p>
+          </div>
+        </div>
       </footer>
     </>
   );

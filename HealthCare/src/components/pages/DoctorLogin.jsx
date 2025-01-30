@@ -11,34 +11,45 @@ const DoctorLogin = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Add authentication logic here
+    // Add authentication logic here later
     navigate('/doctor-dashboard');
   };
 
   return (
-    <div className="login-container">
-      <div className="login-box">
-        <h2>Doctor Login</h2>
+    <div className="doctor-login-container">
+      <div className="doctor-login-box">
+        <div className="login-header">
+          <i className="fas fa-user-md"></i>
+          <h2>Doctor Login</h2>
+        </div>
         <form onSubmit={handleSubmit}>
           <div className="form-group">
-            <label>Email</label>
+            <label>
+              <i className="fas fa-envelope"></i> Email
+            </label>
             <input
               type="email"
               value={credentials.email}
               onChange={(e) => setCredentials({ ...credentials, email: e.target.value })}
               required
+              placeholder="Enter your email"
             />
           </div>
           <div className="form-group">
-            <label>Password</label>
+            <label>
+              <i className="fas fa-lock"></i> Password
+            </label>
             <input
               type="password"
               value={credentials.password}
               onChange={(e) => setCredentials({ ...credentials, password: e.target.value })}
               required
+              placeholder="Enter your password"
             />
           </div>
-          <button type="submit" className="login-button">Login</button>
+          <button type="submit" className="login-button">
+            <i className="fas fa-sign-in-alt"></i> Login
+          </button>
         </form>
       </div>
     </div>
