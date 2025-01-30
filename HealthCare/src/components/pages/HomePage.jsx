@@ -5,146 +5,190 @@ import "../../styles/css-pages/HomePage.css";
 const HomePage = () => {
   const navigate = useNavigate();
 
-  const handleDoctorLogin = () => {
-    navigate('/doctor-login');
-  };
-
   return (
     <>
-      <header className="hero-header">
-        <div className="container">
+      {/* Header Section */}
+      <header className="header">
+        <div className="header-container">
           <div className="logo">
-            <i className="fa fa-heartbeat"></i>
-            <span className="highlight">Health</span>Care
+            <div className="heart-icon">❤</div>
+            <span className="logo-health">Health</span>
+            <span className="logo-care">Care</span>
           </div>
-          <nav className="navbar">
-            <a href="#about"><i className="fa fa-info-circle"></i> About Us</a>
-            <a href="#services"><i className="fa fa-briefcase-medical"></i> Our Services</a>
-            <a href="#contact"><i className="fa fa-envelope"></i> Contact</a>
+          <nav className="nav-links">
+            <a href="#about">About Us</a>
+            <a href="#services">Services</a>
+            <a href="#testimonials">Testimonials</a>
+            <a href="#contact">Contact</a>
+            <a href="#portal-section" className="login-btn">Login</a>
           </nav>
         </div>
       </header>
 
-      <section className="hero-section">
-        <div className="hero-content">
-          <h1>Welcome to Healthcare System</h1>
-          <p>We provide tailored solutions for administrators, doctors, and patients to make healthcare accessible and efficient.</p>
-          <a href="#services" className="btn-primary">Join Us</a>
-        </div>
-      </section>
+      <div className="home-container">
+        {/* Main content starts here */}
+        <main className="main-content">
+          <h1>
+            <span className="gradient-text">Your Health</span>, Our Priority
+          </h1>
+          <p className="subtitle">
+            <span className="gradient-text">Advanced Healthcare Solutions</span> for a Better Tomorrow
+          </p>
+          <p className="description">
+            Experience world-class healthcare services with cutting-edge technology and compassionate
+            care from our team of expert medical professionals.
+          </p>
+          <div className="button-group">
+            <button className="btn explore">EXPLORE SERVICES</button>
+            <button className="btn book">Book Appointment</button>
+          </div>
 
-      <section className="login-section">
-        <div className="container">
-          <h2>Login to Your Portal</h2>
-          <p>Access specialized features by logging into your respective portal.</p>
-          <div className="login-cards">
-            <div className="login-card">
-              <i className="fas fa-user-shield"></i>
-              <h3>Admin Login</h3>
-              <p>Manage the healthcare system, staff, and services with ease.</p>
-              <button className="btn-login">Log In as Admin</button>
+          <div className="stats-container">
+            <div className="stat-item">
+              <span className="stat-number">50+</span>
+              <span className="stat-text">Expert Doctors</span>
             </div>
-            <div className="login-card">
-              <i className="fas fa-user-md"></i>
-              <h3>Doctor Login</h3>
-              <p>View appointments, manage schedules, and access patient records.</p>
-              <button className="btn-login" onClick={handleDoctorLogin}>Log In as Doctor</button>
+            <div className="stat-item">
+              <span className="stat-number">10k+</span>
+              <span className="stat-text">Happy Patients</span>
             </div>
-            <div className="login-card">
-              <i className="fas fa-user"></i>
-              <h3>Patient Login</h3>
-              <p>Book appointments, access reports, and consult with doctors.</p>
-              <button className="btn-login">Log In as Patient</button>
+            <div className="stat-item">
+              <span className="stat-number">15+</span>
+              <span className="stat-text">Years Experience</span>
             </div>
           </div>
-        </div>
-      </section>
+        </main>
 
-      <section className="services-section" id="services">
-        <div className="container">
-          <h2>Our Services</h2>
-          <p>Explore the range of services we offer to make healthcare simple and accessible for you.</p>
-          <div className="services-grid">
-            <div className="service">
-              <i className="fas fa-stethoscope"></i>
-              <h3>Telemedicine</h3>
-              <p>Access consultations from home.</p>
+        {/* Why Choose Us Section */}
+        <section className="why-choose-us">
+          <h2>Why Choose Us?</h2>
+          <div className="features-grid">
+            <div className="feature-card">
+              <div className="feature-icon">
+                <i className="fas fa-user-md"></i>
+              </div>
+              <h3>Expert Doctors</h3>
+              <p>World-class healthcare professionals with years of experience in their specialties</p>
             </div>
-            <div className="service">
-              <i className="fas fa-calendar-check"></i>
-              <h3>Appointment Scheduling</h3>
-              <p>Manage your appointments effortlessly.</p>
+            <div className="feature-card">
+              <div className="feature-icon">
+                <i className="fas fa-laptop-medical"></i>
+              </div>
+              <h3>Advanced Technology</h3>
+              <p>State-of-the-art medical equipment and innovative treatment solutions</p>
             </div>
-            <div className="service">
-              <i className="fas fa-notes-medical"></i>
-              <h3>Medical Records</h3>
-              <p>Securely store and access your history.</p>
+            <div className="feature-card">
+              <div className="feature-icon">
+                <i className="fas fa-ambulance"></i>
+              </div>
+              <h3>24/7 Emergency Care</h3>
+              <p>Round-the-clock emergency services with rapid response teams</p>
             </div>
-            <div className="service">
-              <i className="fas fa-hospital"></i>
-              <h3>In-Clinic Visits</h3>
-              <p>Organize your in-person consultations easily.</p>
-            </div>
-            <div className="service">
-              <i className="fas fa-ambulance"></i>
-              <h3>Emergency Services</h3>
-              <p>Quick response for urgent needs.</p>
-            </div>
-            <div className="service">
-              <i className="fas fa-heartbeat"></i>
-              <h3>Health Monitoring</h3>
-              <p>Track your vitals and improve your health.</p>
-            </div>
-            <div className="service">
-              <i className="fas fa-user-nurse"></i>
-              <h3>Nursing Support</h3>
-              <p>Get professional care at your convenience.</p>
-            </div>
-            <div className="service">
-              <i className="fas fa-prescription"></i>
-              <h3>Pharmacy Access</h3>
-              <p>Order and refill prescriptions online.</p>
-            </div>
-            <div className="service">
-              <i className="fas fa-headset"></i>
-              <h3>24/7 Support</h3>
-              <p>Reach out anytime for assistance.</p>
-            </div>
-            <div className="service">
-              <i className="fas fa-diagnoses"></i>
-              <h3>Diagnostic Services</h3>
-              <p>Access lab results and diagnostics.</p>
-            </div>
-            <div className="service">
-              <i className="fas fa-brain"></i>
-              <h3>Mental Health Care</h3>
-              <p>Professional counseling and mental wellness support.</p>
-            </div>
-            <div className="service">
-              <i className="fas fa-wheelchair"></i>
-              <h3>Rehabilitation Services</h3>
-              <p>Comprehensive physical therapy and rehabilitation.</p>
+            <div className="feature-card">
+              <div className="feature-icon">
+                <i className="fas fa-flask"></i>
+              </div>
+              <h3>Modern Laboratories</h3>
+              <p>Advanced diagnostic facilities with precise and quick results</p>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      <footer className="footer">
-        <div className="container">
-          <div className="footer-content">
-            <div className="footer-logo">
-              <i className="fas fa-heartbeat"></i> HealthCare
+        {/* Healthcare Portal Section */}
+        <section id="portal-section" className="portal-section">
+          <h2>Access Your Healthcare Portal</h2>
+          <div className="portal-cards">
+            <div className="portal-card">
+              <h3>Patient Portal</h3>
+              <ul>
+                <li>View Medical Records</li>
+                <li>Schedule Appointments</li>
+                <li>Message Your Doctor</li>
+                <li>Access Lab Results</li>
+              </ul>
+              <button className="portal-btn">Login</button>
             </div>
-            <p>Your partner in ensuring a healthy future for everyone.</p>
-            <div className="footer-links">
-              <a href="#about">About Us</a>
-              <a href="#services">Services</a>
-              <a href="#contact">Contact</a>
+            <div className="portal-card">
+              <h3>Doctor Portal</h3>
+              <ul>
+                <li>Access Patient Records</li>
+                <li>Manage Schedule</li>
+                <li>View Lab Results</li>
+                <li>Telemedicine Console</li>
+              </ul>
+              <button className="portal-btn" onClick={() => navigate('/doctor-login')}>Login</button>
             </div>
-            <p>&copy; 2025 HealthCare System. All rights reserved.</p>
+            <div className="portal-card">
+              <h3>Admin Portal</h3>
+              <ul>
+                <li>System Management</li>
+                <li>User Administration</li>
+                <li>Analytics Dashboard</li>
+                <li>Resource Planning</li>
+              </ul>
+              <button className="portal-btn" onClick={() => navigate('/admin-login')}>Login</button>
+            </div>
           </div>
-        </div>
-      </footer>
+        </section>
+
+        <section id="testimonials" className="testimonials-section">
+          <div className="container">
+            <h2 className="section-title">Patient Testimonials</h2>
+            <div className="testimonials-grid">
+              <div className="testimonial-card">
+                <div className="quote"><i className="fas fa-quote-left"></i></div>
+                <p>Outstanding medical care and professional staff. The doctors are highly knowledgeable++ and caring.</p>
+                <div className="author">- Pavan</div>
+              </div>
+              <div className="testimonial-card">
+                <div className="quote"><i className="fas fa-quote-left"></i></div>
+                <p>The online appointment system is so convenient. I can manage my healthcare needs efficiently.</p>
+                <div className="author">- Sanjith</div>
+              </div>
+              <div className="testimonial-card">
+                <div className="quote"><i className="fas fa-quote-left"></i></div>
+                <p>Excellent facilities and prompt service. The staff is always ready to help with a smile.</p>
+                <div className="author">- Vamsee Krishna</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <footer className="footer">
+          <div className="container">
+            <div className="footer-content">
+              <div className="footer-info">
+                <div className="footer-logo">
+                  <i className="fas fa-heartbeat"></i> HealthCare
+                </div>
+                <p>Providing Quality Healthcare Services</p>
+                <div className="social-links">
+                  <a href="#"><i className="fab fa-facebook"></i></a>
+                  <a href="#"><i className="fab fa-twitter"></i></a>
+                  <a href="#"><i className="fab fa-linkedin"></i></a>
+                  <a href="#"><i className="fab fa-instagram"></i></a>
+                </div>
+              </div>
+              <div className="footer-links">
+                <h3>Quick Links</h3>
+                <a href="#about">About Us</a>
+                <a href="#services">Services</a>
+                <a href="#contact">Contact</a>
+                <a href="#privacy">Privacy Policy</a>
+              </div>
+              <div className="footer-contact">
+                <h3>Contact Us</h3>
+                <p><i className="fas fa-phone"></i> +91 100-100-100-100</p>
+                <p><i className="fas fa-envelope"></i> info@healthcare.com</p>
+                <p><i className="fas fa-map-marker-alt"></i>12 - Medical Center, Guntur City</p>
+              </div>
+            </div>
+            <div className="footer-bottom">
+              <p>&copy; 2024 HealthCare System. All rights reserved.</p>
+            </div>
+          </div>
+        </footer>
+      </div>
     </>
   );
 };
