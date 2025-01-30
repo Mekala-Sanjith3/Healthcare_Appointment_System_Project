@@ -1,0 +1,81 @@
+/* Add any additional styles needed for the dashboard */
+.dashboard-container {
+  background-color: #f8f9fa;
+  min-height: 100vh;
+}
+
+.header {
+  padding: 1.5rem 2rem;
+  background: white;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.card {
+  background: white;
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.card-header {
+  padding: 1rem;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.card-content {
+  padding: 1rem;
+}
+
+.tabs-list {
+  background: white;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.tab-trigger {
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+  cursor: pointer;
+}
+
+.tab-trigger[data-state="active"] {
+  background: #1A76D1;
+  color: white;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table th,
+.table td {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.table th {
+  text-align: left;
+  font-weight: 500;
+  color: #6b7280;
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.button-outline {
+  border: 1px solid #e5e7eb;
+  background: white;
+}
+
+.button-outline:hover {
+  background: #f3f4f6;
+}
+
+/* Add any other custom styles you need */

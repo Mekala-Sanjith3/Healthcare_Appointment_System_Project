@@ -1,9 +1,13 @@
-import React from "react";
-import HomePage from "./components/pages/HomePage";
+import React from 'react';
+import AppRoutes from './routes/AppRoutes';
 import './styles/App.css';  
 
 function App() {
-  return <HomePage />;
+  return (
+    <div className="App">
+      <AppRoutes />
+    </div>
+  );
 }
 
 export default App;
