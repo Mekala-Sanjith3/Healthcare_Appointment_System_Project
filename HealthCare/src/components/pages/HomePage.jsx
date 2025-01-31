@@ -26,6 +26,16 @@ const HomePage = () => {
       </header>
 
       <div className="home-container">
+        {/* Add wave design */}
+        <div className="wave-container">
+          <div className="wave"></div>
+          <div className="wave wave-2"></div>
+        </div>
+        
+        {/* Add floating shapes */}
+        <div className="floating-shape shape-1"></div>
+        <div className="floating-shape shape-2"></div>
+
         {/* Main content starts here */}
         <main className="main-content">
           <h1>
@@ -39,8 +49,7 @@ const HomePage = () => {
             care from our team of expert medical professionals.
           </p>
           <div className="button-group">
-            <button className="btn explore">EXPLORE SERVICES</button>
-            <button className="btn book">Book Appointment</button>
+            <a href="#services" className="btn explore">EXPLORE SERVICES</a>
           </div>
 
           <div className="stats-container">
@@ -58,6 +67,94 @@ const HomePage = () => {
             </div>
           </div>
         </main>
+
+        {/* Add curved divider */}
+        <div className="curved-divider">
+          <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+            <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" className="shape-fill"></path>
+          </svg>
+        </div>
+
+        {/* Add section divider before About section */}
+        <div className="section-divider">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+            <path fill="#f8f9fa" fillOpacity="1" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,112C672,96,768,96,864,112C960,128,1056,160,1152,160C1248,160,1344,128,1392,112L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
+          </svg>
+        </div>
+
+        {/* About Us Section */}
+        <section id="about" className="about-section">
+          <div className="about-container">
+            <h2>About Us</h2>
+            <div className="about-content">
+              <div className="about-text">
+                <h3>Leading Healthcare Provider</h3>
+                <p>With over 15 years of excellence in healthcare, we are committed to providing the highest quality medical services to our community. Our state-of-the-art facilities and dedicated team of healthcare professionals ensure that you receive the best care possible.</p>
+                <div className="about-features">
+                  <div className="about-feature">
+                    <i className="fas fa-hospital"></i>
+                    <h4>Modern Facilities</h4>
+                    <p>Equipped with latest medical technology</p>
+                  </div>
+                  <div className="about-feature">
+                    <i className="fas fa-user-md"></i>
+                    <h4>Expert Doctors</h4>
+                    <p>Highly qualified medical professionals</p>
+                  </div>
+                  <div className="about-feature">
+                    <i className="fas fa-heart"></i>
+                    <h4>Patient Care</h4>
+                    <p>Compassionate and personalized attention</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Add section divider after About section */}
+        <div className="section-divider">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+            <path fill="#ffffff" fillOpacity="1" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,112C672,96,768,96,864,112C960,128,1056,160,1152,160C1248,160,1344,128,1392,112L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
+          </svg>
+        </div>
+
+        {/* Services Section */}
+        <section id="services" className="services-section">
+          <h2>Our Services</h2>
+          <div className="services-grid">
+            <div className="service-card">
+              <i className="fas fa-heartbeat"></i>
+              <h3>Cardiology</h3>
+              <p>Comprehensive heart care and treatments with advanced diagnostic services.</p>
+            </div>
+            <div className="service-card">
+              <i className="fas fa-brain"></i>
+              <h3>Neurology</h3>
+              <p>Expert neurological care for brain and nervous system conditions.</p>
+            </div>
+            <div className="service-card">
+              <i className="fas fa-bone"></i>
+              <h3>Orthopedics</h3>
+              <p>Specialized care for bones, joints, and musculoskeletal conditions.</p>
+            </div>
+            <div className="service-card">
+              <i className="fas fa-stethoscope"></i>
+              <h3>General Medicine</h3>
+              <p>Primary healthcare services for all age groups.</p>
+            </div>
+            <div className="service-card">
+              <i className="fas fa-procedures"></i>
+              <h3>Surgery</h3>
+              <p>Advanced surgical procedures with minimally invasive options.</p>
+            </div>
+            <div className="service-card">
+              <i className="fas fa-pills"></i>
+              <h3>Pharmacy</h3>
+              <p>24/7 pharmacy services with home delivery options.</p>
+            </div>
+          </div>
+        </section>
 
         {/* Why Choose Us Section */}
         <section className="why-choose-us">
