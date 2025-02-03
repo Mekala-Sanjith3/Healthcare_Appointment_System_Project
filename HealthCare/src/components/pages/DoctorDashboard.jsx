@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "../../styles/css-pages/DoctorDashboard.css";
-import { Calendar, Clock, Users, FileText, Bell, Settings, LogOut } from "lucide-react";
+import { Calendar, Clock, Users, FileText, Bell, Settings, LogOut, Brain, History } from "lucide-react";
 
 const DoctorDashboard = () => {
   const [activeTab, setActiveTab] = useState("appointments");
@@ -47,6 +47,14 @@ const DoctorDashboard = () => {
     }
   ];
 
+  const [availability, setAvailability] = useState({
+    monday: { start: "09:00", end: "17:00", isAvailable: true },
+    tuesday: { start: "09:00", end: "17:00", isAvailable: true },
+    wednesday: { start: "09:00", end: "17:00", isAvailable: true },
+    thursday: { start: "09:00", end: "17:00", isAvailable: true },
+    friday: { start: "09:00", end: "17:00", isAvailable: true }
+  });
+
   const handleTabChange = (tab) => {
     setActiveTab(tab);
   };
@@ -57,6 +65,134 @@ const DoctorDashboard = () => {
       case 'pending': return 'status-pending';
       case 'cancelled': return 'status-cancelled';
       default: return '';
+    }
+  };
+
+  const handleAvailabilityChange = (day, field, value) => {
+    setAvailability(prevAvailability => ({
+      ...prevAvailability,
+      [day]: {
+        ...prevAvailability[day],
+        [field]: value
+      }
+    }));
+  };
+
+  const renderContent = () => {
+    switch (activeTab) {
+      case 'appointments':
+        return (
+          <div className="content-card">
+            <div className="card-header">
+              <h2>Today's Appointments</h2>
+              <button className="export-button">
+                <i className="fas fa-download"></i>
+                Export Schedule
+              </button>
+            </div>
+            
+            <div className="appointments-table">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Patient</th>
+                    <th>Time</th>
+                    <th>Type</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {appointments.map(appointment => (
+                    <tr key={appointment.id}>
+                      <td>
+                        <div className="patient-info">
+                          <img 
+                            src={appointment.avatar} 
+                            alt={appointment.patientName}
+                            className="patient-avatar"
+                          />
+                          <span>{appointment.patientName}</span>
+                        </div>
+                      </td>
+                      <td>{appointment.time}</td>
+                      <td>{appointment.type}</td>
+                      <td>
+                        <span className={`status-badge ${getStatusClass(appointment.status)}`}>
+                          {appointment.status}
+                        </span>
+                      </td>
+                      <td>
+                        <button className="view-details-btn">
+                          View Details
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        );
+      
+      case 'availability':
+        return (
+          <div className="content-card">
+            <div className="card-header">
+              <h2>Manage Availability</h2>
+              <button className="ai-suggest-btn">
+                <Brain className="nav-icon" />
+                AI Suggestions
+              </button>
+            </div>
+            <div className="availability-grid">
+              {Object.entries(availability).map(([day, schedule]) => (
+                <div key={day} className="availability-card">
+                  <h3>{day.charAt(0).toUpperCase() + day.slice(1)}</h3>
+                  <div className="time-inputs">
+                    <input 
+                      type="time" 
+                      value={schedule.start}
+                      onChange={(e) => handleAvailabilityChange(day, 'start', e.target.value)}
+                    />
+                    <span>to</span>
+                    <input 
+                      type="time" 
+                      value={schedule.end}
+                      onChange={(e) => handleAvailabilityChange(day, 'end', e.target.value)}
+                    />
+                  </div>
+                  <label className="availability-toggle">
+                    <input
+                      type="checkbox"
+                      checked={schedule.isAvailable}
+                      onChange={(e) => handleAvailabilityChange(day, 'isAvailable', e.target.checked)}
+                    />
+                    <span>Available</span>
+                  </label>
+                </div>
+              ))}
+            </div>
+          </div>
+        );
+
+      case 'patient-history':
+        return (
+          <div className="content-card">
+            <div className="card-header">
+              <h2>Patient History</h2>
+              <div className="search-bar">
+                <input type="text" placeholder="Search patients..." />
+              </div>
+            </div>
+            <div className="patient-history-list">
+              {/* Patient history content */}
+            </div>
+          </div>
+        );
+
+      default:
+        return null;
     }
   };
 
@@ -76,6 +212,22 @@ const DoctorDashboard = () => {
           >
             <Calendar className="nav-icon" />
             <span>Appointments</span>
+          </button>
+          
+          <button 
+            className={`nav-item ${activeTab === 'availability' ? 'active' : ''}`}
+            onClick={() => handleTabChange('availability')}
+          >
+            <Clock className="nav-icon" />
+            <span>Availability</span>
+          </button>
+          
+          <button 
+            className={`nav-item ${activeTab === 'patient-history' ? 'active' : ''}`}
+            onClick={() => handleTabChange('patient-history')}
+          >
+            <History className="nav-icon" />
+            <span>Patient History</span>
           </button>
           
           <button 
@@ -125,38 +277,9 @@ const DoctorDashboard = () => {
           </div>
           
           <div className="header-actions">
-            <div className="notifications-wrapper">
-              <button 
-                className="notification-button"
-                onClick={() => setShowNotifications(!showNotifications)}
-              >
-                <Bell className="nav-icon" />
-                <span className="notification-badge">2</span>
-              </button>
-              
-              {showNotifications && (
-                <div className="notifications-dropdown">
-                  <h3>Notifications</h3>
-                  {notifications.map(notification => (
-                    <div key={notification.id} className="notification-item">
-                      <i className={`fas fa-${notification.type === 'appointment' ? 'calendar' : 'flask'}`}></i>
-                      <div className="notification-content">
-                        <p>{notification.message}</p>
-                        <span>{notification.time}</span>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              )}
-            </div>
-            
             <div className="doctor-profile">
-              <img 
-                src="https://ui-avatars.com/api/?name=Sarah+Wilson&background=random" 
-                alt="Doctor profile"
-                className="profile-avatar"
-              />
-              <span>Dr. Sarah Wilson</span>
+              <div className="profile-avatar">SW</div>
+              <span className="doctor-name">Dr. Sarah Wilson</span>
             </div>
           </div>
         </header>
@@ -208,58 +331,7 @@ const DoctorDashboard = () => {
           </div>
         </div>
 
-        {/* Appointments Table */}
-        <div className="content-card">
-          <div className="card-header">
-            <h2>Today's Appointments</h2>
-            <button className="export-button">
-              <i className="fas fa-download"></i>
-              Export Schedule
-            </button>
-          </div>
-          
-          <div className="appointments-table">
-            <table>
-              <thead>
-                <tr>
-                  <th>Patient</th>
-                  <th>Time</th>
-                  <th>Type</th>
-                  <th>Status</th>
-                  <th>Action</th>
-                </tr>
-              </thead>
-              <tbody>
-                {appointments.map(appointment => (
-                  <tr key={appointment.id}>
-                    <td>
-                      <div className="patient-info">
-                        <img 
-                          src={appointment.avatar} 
-                          alt={appointment.patientName}
-                          className="patient-avatar"
-                        />
-                        <span>{appointment.patientName}</span>
-                      </div>
-                    </td>
-                    <td>{appointment.time}</td>
-                    <td>{appointment.type}</td>
-                    <td>
-                      <span className={`status-badge ${getStatusClass(appointment.status)}`}>
-                        {appointment.status}
-                      </span>
-                    </td>
-                    <td>
-                      <button className="view-details-btn">
-                        View Details
-                      </button>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </div>
+        {renderContent()}
       </main>
     </div>
   );
