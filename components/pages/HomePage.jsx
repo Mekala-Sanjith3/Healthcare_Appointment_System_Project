@@ -277,7 +277,7 @@ const HomePage = () => {
                 <h3>Contact Us</h3>
                 <p><i className="fas fa-phone"></i> +91 100-100-100-100</p>
                 <p><i className="fas fa-envelope"></i> info@healthcare.com</p>
-                <p><i className="fas fa-map-marker-alt"></i>12 - Medical Center, Guntur City</p>
+                <p><i className="fas fa-map-marker-alt"></i>Guntur City</p>
               </div>
             </div>
             <div className="footer-bottom">
