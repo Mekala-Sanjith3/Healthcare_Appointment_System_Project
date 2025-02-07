@@ -203,7 +203,7 @@ const HomePage = () => {
                 <li>Message Your Doctor</li>
                 <li>Access Lab Results</li>
               </ul>
-              <button className="portal-btn">Login</button>
+              <button className="portal-btn" onClick={() => navigate('/patient-login')}>Login</button>
             </div>
             <div className="portal-card">
               <h3>Doctor Portal</h3>
