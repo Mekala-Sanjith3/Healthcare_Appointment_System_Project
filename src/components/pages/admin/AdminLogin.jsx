@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "../../styles/css-pages/PatientLogin.css";
+import { Button } from "../../common/Button/button";
+import { Input } from "../../common/Input/input";
+import "../../../styles/pages/admin/AdminLogin.css";
 
-const PatientLogin = () => {
+const AdminLogin = () => {
   const navigate = useNavigate();
   const [credentials, setCredentials] = useState({
     email: "",
@@ -18,7 +20,7 @@ const PatientLogin = () => {
     // Simulate API call
     setTimeout(() => {
       setIsLoading(false);
-      navigate('/patient-dashboard');
+      navigate('/admin-dashboard');
     }, 1500);
   };
 
@@ -27,22 +29,22 @@ const PatientLogin = () => {
       <div className="login-wrapper">
         <div className="login-left">
           <div className="welcome-content">
-            <i className="fas fa-user-circle logo-icon"></i>
-            <h1>Welcome Back</h1>
-            <p>Access your healthcare portal for personalized care</p>
+            <i className="fas fa-user-shield logo-icon"></i>
+            <h1>Welcome Back, Admin</h1>
+            <p>Access your dashboard to manage the healthcare system</p>
           </div>
           <div className="features">
             <div className="feature-item">
-              <i className="fas fa-calendar-plus"></i>
-              <span>Book Appointments</span>
+              <i className="fas fa-users-cog"></i>
+              <span>Manage Users</span>
             </div>
             <div className="feature-item">
-              <i className="fas fa-video"></i>
-              <span>Telemedicine Services</span>
+              <i className="fas fa-chart-line"></i>
+              <span>System Analytics</span>
             </div>
             <div className="feature-item">
               <i className="fas fa-robot"></i>
-              <span>AI Doctor Recommendations</span>
+              <span>AI Management</span>
             </div>
           </div>
         </div>
@@ -50,7 +52,7 @@ const PatientLogin = () => {
         <div className="login-right">
           <div className="login-box">
             <div className="login-header">
-              <h2>Patient Login</h2>
+              <h2>Admin Login</h2>
               <p>Please enter your credentials</p>
             </div>
 
@@ -120,23 +122,23 @@ const PatientLogin = () => {
                 ) : (
                   <>
                     <i className="fas fa-sign-in-alt"></i>
-                    Login
+                    Login to Dashboard
                   </>
                 )}
               </button>
             </form>
 
             <div className="login-footer">
-              <p>New patient?</p>
-              <a href="#" className="register-link">
-                <i className="fas fa-user-plus"></i>
-                Register Now
+              <p>Need technical support?</p>
+              <a href="#" className="support-link">
+                <i className="fas fa-headset"></i>
+                Contact IT Support
               </a>
             </div>
 
             <div className="security-note">
               <i className="fas fa-shield-alt"></i>
-              <p>Your health information is protected by industry standard encryption</p>
+              <p>Secure admin access protected by enhanced security measures</p>
             </div>
           </div>
         </div>
@@ -145,4 +147,4 @@ const PatientLogin = () => {
   );
 };
 
-export default PatientLogin; 
+export default AdminLogin; 

@@ -1,12 +1,12 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import HomePage from '../components/pages/HomePage';
-import DoctorLogin from '../components/pages/DoctorLogin';
-import DoctorDashboard from '../components/pages/DoctorDashboard';
-import PatientLogin from '../components/pages/PatientLogin';
-import PatientDashboard from '../components/pages/PatientDashboard';
-import AdminLogin from '../components/pages/AdminLogin';
-import AdminDashboard from '../components/pages/AdminDashboard';
+import HomePage from '../components/pages/home/HomePage';
+import DoctorLogin from '../components/pages/doctor/DoctorLogin';
+import DoctorDashboard from '../components/pages/doctor/DoctorDashboard';
+import PatientLogin from '../components/pages/patient/PatientLogin';
+import PatientDashboard from '../components/pages/patient/PatientDashboard';
+import AdminLogin from '../components/pages/admin/AdminLogin';
+import AdminDashboard from '../components/pages/admin/AdminDashboard';
 
 const AppRoutes = () => {
   return (

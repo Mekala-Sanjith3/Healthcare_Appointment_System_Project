@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import '../../styles/css-pages/PatientDashboard.css';
+import { Table, TableHeader, TableBody, TableRow, TableHead, TableCell } from "../../common/Table/table";
+import { Card, CardHeader, CardTitle, CardContent } from "../../common/Card/card";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "../../common/Tabs/tabs";
+import "../../../styles/pages/patient/PatientDashboard.css";
 
 const PatientDashboard = () => {
   const navigate = useNavigate();

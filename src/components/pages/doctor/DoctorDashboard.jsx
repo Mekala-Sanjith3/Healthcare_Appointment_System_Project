@@ -1,5 +1,9 @@
 import React, { useState } from "react";
-import "../../styles/css-pages/DoctorDashboard.css";
+import { useNavigate } from 'react-router-dom';
+import { Table, TableHeader, TableBody, TableRow, TableHead, TableCell } from "../../common/Table/table";
+import { Card, CardHeader, CardTitle, CardContent } from "../../common/Card/card";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "../../common/Tabs/tabs";
+import "../../../styles/pages/doctor/DoctorDashboard.css";
 import { Calendar, Clock, Users, FileText, Bell, Settings, LogOut, Brain, History } from "lucide-react";
 
 const DoctorDashboard = () => {
