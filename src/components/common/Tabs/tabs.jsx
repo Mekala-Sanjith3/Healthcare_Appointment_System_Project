@@ -1,5 +1,5 @@
-import * as React from "react"
-import * as TabsPrimitive from "@radix-ui/react-tabs"
+import React from 'react';
+import { Tabs as TabsPrimitive } from "@radix-ui/react-tabs"
 
 const Tabs = TabsPrimitive.Root
 
@@ -10,7 +10,7 @@ const TabsList = React.forwardRef(({ className, ...props }, ref) => (
     {...props}
   />
 ))
-TabsList.displayName = TabsPrimitive.List.displayName
+TabsList.displayName = "TabsList"
 
 const TabsTrigger = React.forwardRef(({ className, ...props }, ref) => (
   <TabsPrimitive.Trigger
@@ -19,7 +19,7 @@ const TabsTrigger = React.forwardRef(({ className, ...props }, ref) => (
     {...props}
   />
 ))
-TabsTrigger.displayName = TabsPrimitive.Trigger.displayName
+TabsTrigger.displayName = "TabsTrigger"
 
 const TabsContent = React.forwardRef(({ className, ...props }, ref) => (
   <TabsPrimitive.Content
@@ -28,6 +28,6 @@ const TabsContent = React.forwardRef(({ className, ...props }, ref) => (
     {...props}
   />
 ))
-TabsContent.displayName = TabsPrimitive.Content.displayName
+TabsContent.displayName = "TabsContent"
 
 export { Tabs, TabsList, TabsTrigger, TabsContent }

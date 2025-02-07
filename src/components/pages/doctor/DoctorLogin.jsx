@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "../../styles/css-pages/DoctorLogin.css";
+import { Button } from "../../common/Button/button";
+import { Input } from "../../common/Input/input";
+import "../../../styles/pages/doctor/DoctorLogin.css";
 
 const DoctorLogin = () => {
   const navigate = useNavigate();

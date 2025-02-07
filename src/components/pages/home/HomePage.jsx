@@ -1,6 +1,8 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import "../../styles/css-pages/HomePage.css";
+import { Button } from "../../common/Button/button";
+import { Card } from "../../common/Card/card";
+import "../../../styles/pages/home/HomePage.css";
 
 const HomePage = () => {
   const navigate = useNavigate();
@@ -203,7 +205,7 @@ const HomePage = () => {
                 <li>Message Your Doctor</li>
                 <li>Access Lab Results</li>
               </ul>
-              <button className="portal-btn">Login</button>
+              <button className="portal-btn" onClick={() => navigate('/patient-login')}>Login</button>
             </div>
             <div className="portal-card">
               <h3>Doctor Portal</h3>
