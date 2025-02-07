@@ -1274,81 +1274,170 @@ html {
   }
 }
 
-/* Services Section */
+/* Services Section Styles */
 .services-section {
-  padding: 100px 0;
-  background: linear-gradient(to bottom, #f8f9fa, #ffffff);
-  scroll-margin-top: 2cm;
+  padding: 5rem 2rem;
+  background: linear-gradient(to bottom, #f8fafc, #ffffff);
 }
 
-.services-section h2 {
-  font-size: 2.5rem;
-  color: var(--secondary-color);
+.section-title {
   text-align: center;
-  margin-bottom: 50px;
+  font-size: 2.5rem;
+  color: var(--primary-color);
+  margin-bottom: 3rem;
   position: relative;
-  padding-bottom: 15px;
+  padding-bottom: 1rem;
 }
 
-.services-section h2:after {
+.section-title::after {
   content: '';
   position: absolute;
   bottom: 0;
   left: 50%;
   transform: translateX(-50%);
-  width: 80px;
+  width: 100px;
   height: 3px;
   background: var(--primary-color);
+  border-radius: 2px;
 }
 
 .services-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 30px;
-  max-width: 1200px;
+  gap: 2rem;
+  max-width: 1400px;
   margin: 0 auto;
-  padding: 0 20px;
+  padding: 1rem;
 }
 
 .service-card {
-  background: white;
-  padding: 40px;
-  border-radius: 15px;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
-  text-align: center;
+  background: var(--white);
+  border-radius: 20px;
+  padding: 2rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
 }
 
 .service-card:hover {
   transform: translateY(-10px);
-  box-shadow: 0 20px 30px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
 }
 
-.service-card i {
-  font-size: 3rem;
-  color: var(--primary-color);
-  margin-bottom: 20px;
+.service-icon {
+  width: 80px;
+  height: 80px;
+  background: linear-gradient(135deg, var(--primary-color), #4facfe);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+  transition: all 0.3s ease;
+}
+
+.service-card:hover .service-icon {
+  transform: scale(1.1);
+}
+
+.service-icon i {
+  font-size: 2rem;
+  color: var(--white);
 }
 
 .service-card h3 {
-  color: var(--secondary-color);
   font-size: 1.5rem;
-  margin-bottom: 15px;
+  color: var(--text-color);
+  margin-bottom: 1rem;
+  font-weight: 600;
 }
 
 .service-card p {
-  color: var(--text-color);
+  color: var(--text-light);
   line-height: 1.6;
+  margin-bottom: 1.5rem;
 }
 
-/* Responsive adjustments */
+.service-features {
+  list-style: none;
+  padding: 0;
+  margin: 1.5rem 0;
+  text-align: left;
+  width: 100%;
+}
+
+.service-features li {
+  margin-bottom: 0.8rem;
+  color: var(--text-color);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.service-features li i {
+  color: var(--primary-color);
+  font-size: 0.9rem;
+}
+
+.service-btn {
+  background: linear-gradient(135deg, var(--primary-color), #4facfe);
+  color: var(--white);
+  border: none;
+  padding: 0.8rem 2rem;
+  border-radius: 25px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: auto;
+  text-decoration: none; /* Added for anchor tags */
+  display: inline-block; /* Added for anchor tags */
+}
+
+.service-btn:hover {
+  background: linear-gradient(135deg, #4facfe, var(--primary-color));
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(79, 172, 254, 0.4);
+  color: var(--white); /* Ensure text stays white on hover */
+  text-decoration: none; /* Ensure no underline on hover */
+}
+
+/* Responsive Design */
 @media (max-width: 768px) {
-  .about-features {
-    grid-template-columns: 1fr;
-  }
-  
   .services-grid {
     grid-template-columns: 1fr;
+    padding: 1rem;
+  }
+
+  .service-card {
+    padding: 1.5rem;
+  }
+
+  .section-title {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .services-section {
+    padding: 3rem 1rem;
+  }
+
+  .service-icon {
+    width: 60px;
+    height: 60px;
+  }
+
+  .service-icon i {
+    font-size: 1.5rem;
+  }
+
+  .service-card h3 {
+    font-size: 1.25rem;
   }
 }
 
