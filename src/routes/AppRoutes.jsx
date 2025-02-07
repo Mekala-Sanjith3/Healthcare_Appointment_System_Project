@@ -5,6 +5,8 @@ import DoctorLogin from '../components/pages/DoctorLogin';
 import DoctorDashboard from '../components/pages/DoctorDashboard';
 import PatientLogin from '../components/pages/PatientLogin';
 import PatientDashboard from '../components/pages/PatientDashboard';
+import AdminLogin from '../components/pages/AdminLogin';
+import AdminDashboard from '../components/pages/AdminDashboard';
 
 const AppRoutes = () => {
   return (
@@ -15,6 +17,8 @@ const AppRoutes = () => {
         <Route path="/doctor-dashboard" element={<DoctorDashboard />} />
         <Route path="/patient-login" element={<PatientLogin />} />
         <Route path="/patient-dashboard" element={<PatientDashboard />} />
+        <Route path="/admin-login" element={<AdminLogin />} />
+        <Route path="/admin-dashboard" element={<AdminDashboard />} />
       </Routes>
     </Router>
   );
