@@ -41,7 +41,7 @@ const HomePage = () => {
         {/* Main content starts here */}
         <main className="main-content">
           <h1>
-            <span className="gradient-text">Your Health</span>, Our Priority
+            <span className="gradient-text">Empowering Health</span>, Enriching Lives
           </h1>
           <p className="subtitle">
             <span className="gradient-text">Advanced Healthcare Solutions</span> for a Better Tomorrow
@@ -122,41 +122,125 @@ const HomePage = () => {
         </div>
 
         {/* Services Section */}
-        <section id="services" className="services-section">
-          <h2>Our Services</h2>
-          <div className="services-grid">
-            <div className="service-card">
-              <i className="fas fa-heartbeat"></i>
-              <h3>Cardiology</h3>
-              <p>Comprehensive heart care and treatments with advanced diagnostic services.</p>
-            </div>
-            <div className="service-card">
-              <i className="fas fa-brain"></i>
-              <h3>Neurology</h3>
-              <p>Expert neurological care for brain and nervous system conditions.</p>
-            </div>
-            <div className="service-card">
-              <i className="fas fa-bone"></i>
-              <h3>Orthopedics</h3>
-              <p>Specialized care for bones, joints, and musculoskeletal conditions.</p>
-            </div>
-            <div className="service-card">
-              <i className="fas fa-stethoscope"></i>
-              <h3>General Medicine</h3>
-              <p>Primary healthcare services for all age groups.</p>
-            </div>
-            <div className="service-card">
-              <i className="fas fa-procedures"></i>
-              <h3>Surgery</h3>
-              <p>Advanced surgical procedures with minimally invasive options.</p>
-            </div>
-            <div className="service-card">
-              <i className="fas fa-pills"></i>
-              <h3>Pharmacy</h3>
-              <p>24/7 pharmacy services with home delivery options.</p>
-            </div>
-          </div>
-        </section>
+<section id="services" className="services-section">
+  <h2 className="section-title">Our Services</h2>
+  <div className="services-grid">
+    {/* Existing cards with updated buttons */}
+    <div className="service-card">
+      <div className="service-icon">
+        <i className="fas fa-heart-pulse"></i>
+      </div>
+      <h3>Cardiology</h3>
+      <p>Expert heart care with advanced diagnostic and treatment services</p>
+      <ul className="service-features">
+        <li><i className="fas fa-check"></i> Heart Disease Treatment</li>
+        <li><i className="fas fa-check"></i> ECG & Echo Tests</li>
+        <li><i className="fas fa-check"></i> Blood Pressure Care</li>
+      </ul>
+      <a href="https://en.wikipedia.org/wiki/Cardiology" target="_blank" rel="noopener noreferrer" className="service-btn">Learn More</a>
+    </div>
+
+    <div className="service-card">
+      <div className="service-icon">
+        <i className="fas fa-brain"></i>
+      </div>
+      <h3>Neurology</h3>
+      <p>Comprehensive care for neurological conditions and disorders</p>
+      <ul className="service-features">
+        <li><i className="fas fa-check"></i> Brain Disorder Treatment</li>
+        <li><i className="fas fa-check"></i> Spine Care</li>
+        <li><i className="fas fa-check"></i> Stroke Management</li>
+      </ul>
+      <a href="https://en.wikipedia.org/wiki/Neurology" target="_blank" rel="noopener noreferrer" className="service-btn">Learn More</a>
+    </div>
+
+    <div className="service-card">
+      <div className="service-icon">
+        <i className="fas fa-bone"></i>
+      </div>
+      <h3>Orthopedics</h3>
+      <p>Specialized care for bones, joints, and musculoskeletal conditions</p>
+      <ul className="service-features">
+        <li><i className="fas fa-check"></i> Joint Replacement</li>
+        <li><i className="fas fa-check"></i> Sports Injuries</li>
+        <li><i className="fas fa-check"></i> Fracture Care</li>
+      </ul>
+      <a href="https://en.wikipedia.org/wiki/Orthopedic_surgery" target="_blank" rel="noopener noreferrer" className="service-btn">Learn More</a>
+    </div>
+
+    <div className="service-card">
+      <div className="service-icon">
+        <i className="fas fa-tooth"></i>
+      </div>
+      <h3>Dental Care</h3>
+      <p>Complete dental solutions for a healthy and beautiful smile</p>
+      <ul className="service-features">
+        <li><i className="fas fa-check"></i> Dental Implants</li>
+        <li><i className="fas fa-check"></i> Root Canal</li>
+        <li><i className="fas fa-check"></i> Cosmetic Dentistry</li>
+      </ul>
+      <a href="https://en.wikipedia.org/wiki/Dentistry" target="_blank" rel="noopener noreferrer" className="service-btn">Learn More</a>
+    </div>
+
+    <div className="service-card">
+      <div className="service-icon">
+        <i className="fas fa-eye"></i>
+      </div>
+      <h3>Ophthalmology</h3>
+      <p>Advanced eye care and vision correction treatments</p>
+      <ul className="service-features">
+        <li><i className="fas fa-check"></i> Cataract Surgery</li>
+        <li><i className="fas fa-check"></i> Vision Correction</li>
+        <li><i className="fas fa-check"></i> Glaucoma Treatment</li>
+      </ul>
+      <a href="https://en.wikipedia.org/wiki/Ophthalmology" target="_blank" rel="noopener noreferrer" className="service-btn">Learn More</a>
+    </div>
+
+    <div className="service-card">
+      <div className="service-icon">
+        <i className="fas fa-stethoscope"></i>
+      </div>
+      <h3>General Medicine</h3>
+      <p>Primary healthcare services for all age groups</p>
+      <ul className="service-features">
+        <li><i className="fas fa-check"></i> Regular Checkups</li>
+        <li><i className="fas fa-check"></i> Vaccinations</li>
+        <li><i className="fas fa-check"></i> Health Screening</li>
+      </ul>
+      <a href="https://en.wikipedia.org/wiki/Internal_medicine" target="_blank" rel="noopener noreferrer" className="service-btn">Learn More</a>
+    </div>
+
+    {/* New Service Cards */}
+    <div className="service-card">
+      <div className="service-icon">
+        <i className="fas fa-lungs"></i>
+      </div>
+      <h3>Pulmonology</h3>
+      <p>Specialized care for respiratory system and lung diseases</p>
+      <ul className="service-features">
+        <li><i className="fas fa-check"></i> Asthma Treatment</li>
+        <li><i className="fas fa-check"></i> COPD Management</li>
+        <li><i className="fas fa-check"></i> Sleep Disorders</li>
+      </ul>
+      <a href="https://en.wikipedia.org/wiki/Pulmonology" target="_blank" rel="noopener noreferrer" className="service-btn">Learn More</a>
+    </div>
+
+    <div className="service-card">
+      <div className="service-icon">
+        <i className="fas fa-notes-medical"></i>
+      </div>
+      <h3>Nephrology</h3>
+      <p>Expert care for kidney diseases and related conditions</p>
+      <ul className="service-features">
+        <li><i className="fas fa-check"></i> Kidney Disease Treatment</li>
+        <li><i className="fas fa-check"></i> Dialysis Services</li>
+        <li><i className="fas fa-check"></i> Transplant Care</li>
+      </ul>
+      <a href="https://en.wikipedia.org/wiki/Nephrology" target="_blank" rel="noopener noreferrer" className="service-btn">Learn More</a>
+    </div>
+  </div>
+</section>
+
 
         {/* Why Choose Us Section */}
         <section className="why-choose-us">

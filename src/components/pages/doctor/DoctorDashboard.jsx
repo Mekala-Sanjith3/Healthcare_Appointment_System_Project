@@ -12,7 +12,7 @@ const DoctorDashboard = () => {
   const [appointments] = useState([
     {
       id: 1,
-      patientName: "John Doe",
+      patientName: "Siva Ram",
       time: "09:00 AM",
       type: "Check-up",
       status: "Confirmed",
@@ -20,7 +20,7 @@ const DoctorDashboard = () => {
     },
     {
       id: 2,
-      patientName: "Jane Smith",
+      patientName: "Chetan",
       time: "10:30 AM",
       type: "Follow-up",
       status: "Pending",
@@ -28,7 +28,7 @@ const DoctorDashboard = () => {
     },
     {
       id: 3,
-      patientName: "Mike Johnson",
+      patientName: "Umesh Chandra",
       time: "02:00 PM",
       type: "Consultation",
       status: "Confirmed",
@@ -39,13 +39,13 @@ const DoctorDashboard = () => {
   const notifications = [
     {
       id: 1,
-      message: "New appointment request from Sarah Parker",
+      message: "New appointment request from Yashwanth",
       time: "5 minutes ago",
       type: "appointment"
     },
     {
       id: 2,
-      message: "Lab results ready for patient John Doe",
+      message: "Lab results ready for patient Raghu",
       time: "1 hour ago",
       type: "lab"
     }
@@ -58,6 +58,8 @@ const DoctorDashboard = () => {
     thursday: { start: "09:00", end: "17:00", isAvailable: true },
     friday: { start: "09:00", end: "17:00", isAvailable: true }
   });
+
+  const navigate = useNavigate();
 
   const handleTabChange = (tab) => {
     setActiveTab(tab);
@@ -80,6 +82,12 @@ const DoctorDashboard = () => {
         [field]: value
       }
     }));
+  };
+
+  const handleLogout = () => {
+    // Add any logout logic here (clearing tokens, user data, etc.)
+    // Then navigate to homepage
+    navigate('/');
   };
 
   const renderContent = () => {
@@ -264,7 +272,7 @@ const DoctorDashboard = () => {
             <Settings className="nav-icon" />
             <span>Settings</span>
           </button>
-          <button className="nav-item logout">
+          <button className="nav-item logout" onClick={handleLogout}>
             <LogOut className="nav-icon" />
             <span>Logout</span>
           </button>
@@ -276,14 +284,14 @@ const DoctorDashboard = () => {
         {/* Top Bar */}
         <header className="dashboard-header">
           <div className="header-title">
-            <h1>Welcome back, Dr. Sarah Wilson</h1>
+            <h1>Welcome back, Dr. Mohan Venkat</h1>
             <p>Here's your practice overview</p>
           </div>
           
           <div className="header-actions">
             <div className="doctor-profile">
-              <div className="profile-avatar">SW</div>
-              <span className="doctor-name">Dr. Sarah Wilson</span>
+              <div className="profile-avatar">MV</div>
+              <span className="doctor-name">Dr. Mohan Venkat</span>
             </div>
           </div>
         </header>
@@ -291,46 +299,60 @@ const DoctorDashboard = () => {
         {/* Stats Grid */}
         <div className="stats-grid">
           <div className="stat-card">
-            <div className="stat-icon appointments">
-              <Calendar />
-            </div>
-            <div className="stat-details">
-              <h3>Total Appointments</h3>
-              <p className="stat-value">24</p>
-              <p className="stat-label">Today</p>
-            </div>
-          </div>
-
-          <div className="stat-card">
-            <div className="stat-icon hours">
-              <Clock />
-            </div>
-            <div className="stat-details">
-              <h3>Available Hours</h3>
-              <p className="stat-value">6.5</p>
-              <p className="stat-label">Hours remaining today</p>
+            <div className="stat-content">
+              <div className="stat-icon-wrapper appointments">
+                <Calendar className="stat-icon" />
+              </div>
+              <div className="stat-details">
+                <p className="stat-label">Total Appointments</p>
+                <h3 className="stat-value">24</h3>
+                <p className="stat-trend positive">
+                  <span>↑ 12%</span> vs last week
+                </p>
+              </div>
             </div>
           </div>
 
           <div className="stat-card">
-            <div className="stat-icon patients">
-              <Users />
-            </div>
-            <div className="stat-details">
-              <h3>Total Patients</h3>
-              <p className="stat-value">1,234</p>
-              <p className="stat-label">Lifetime</p>
+            <div className="stat-content">
+              <div className="stat-icon-wrapper hours">
+                <Clock className="stat-icon" />
+              </div>
+              <div className="stat-details">
+                <p className="stat-label">Available Hours</p>
+                <h3 className="stat-value">6.5</h3>
+                <p className="stat-trend">Hours remaining today</p>
+              </div>
             </div>
           </div>
 
           <div className="stat-card">
-            <div className="stat-icon reports">
-              <FileText />
+            <div className="stat-content">
+              <div className="stat-icon-wrapper patients">
+                <Users className="stat-icon" />
+              </div>
+              <div className="stat-details">
+                <p className="stat-label">Total Patients</p>
+                <h3 className="stat-value">1,234</h3>
+                <p className="stat-trend positive">
+                  <span>↑ 8%</span> this month
+                </p>
+              </div>
             </div>
-            <div className="stat-details">
-              <h3>Reports Due</h3>
-              <p className="stat-value">8</p>
-              <p className="stat-label">Pending reports</p>
+          </div>
+
+          <div className="stat-card">
+            <div className="stat-content">
+              <div className="stat-icon-wrapper reports">
+                <FileText className="stat-icon" />
+              </div>
+              <div className="stat-details">
+                <p className="stat-label">Reports Due</p>
+                <h3 className="stat-value">8</h3>
+                <p className="stat-trend negative">
+                  <span>↑ 2</span> from yesterday
+                </p>
+              </div>
             </div>
           </div>
         </div>
