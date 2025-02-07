@@ -41,7 +41,7 @@ const HomePage = () => {
         {/* Main content starts here */}
         <main className="main-content">
           <h1>
-            <span className="gradient-text">Your Health</span>, Our Priority
+            <span className="gradient-text">Empowering Health</span>, Enriching Lives
           </h1>
           <p className="subtitle">
             <span className="gradient-text">Advanced Healthcare Solutions</span> for a Better Tomorrow

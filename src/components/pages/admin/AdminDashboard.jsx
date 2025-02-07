@@ -1,8 +1,5 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Table, TableHeader, TableBody, TableRow, TableHead, TableCell } from "../../common/Table/table";
-import { Card, CardHeader, CardTitle, CardContent } from "../../common/Card/card";
-import { Tabs, TabsList, TabsTrigger, TabsContent } from "../../common/Tabs/tabs";
 import "../../../styles/pages/admin/AdminDashboard.css";
 
 const AdminDashboard = () => {
@@ -113,16 +110,160 @@ const AdminDashboard = () => {
           </div>
         </div>
 
-        {/* Content based on active tab */}
-        <div className="content-card">
-          <div className="card-header">
-            <h2>Recent Activity</h2>
-            <button className="export-button">
-              <i className="fas fa-download"></i>
-              Export Data
-            </button>
-          </div>
-          {/* Add content based on activeTab */}
+        <div className="content-section">
+          {activeTab === 'users' && (
+            <div className="content-card">
+              <div className="card-header">
+                <h2>User Management</h2>
+                <button className="export-button">
+                  <i className="fas fa-download"></i>
+                  Export Data
+                </button>
+              </div>
+              <div className="card-content">
+                <table className="data-table">
+                  <thead>
+                    <tr>
+                      <th>User ID</th>
+                      <th>Name</th>
+                      <th>Email</th>
+                      <th>Role</th>
+                      <th>Status</th>
+                      <th>Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>#001</td>
+                      <td>Ganesh</td>
+                      <td>Ganesh@mail.com</td>
+                      <td>Patient</td>
+                      <td><span className="status-badge status-confirmed">Active</span></td>
+                      <td>
+                        <button className="view-details-btn">Edit</button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          )}
+
+          {activeTab === 'analytics' && (
+            <div className="content-card">
+              <div className="card-header">
+                <h2>Analytics & Reports</h2>
+                <button className="export-button">
+                  <i className="fas fa-download"></i>
+                  Export Report
+                </button>
+              </div>
+              <div className="card-content">
+                <div className="analytics-grid">
+                  <div className="chart-container">
+                    <h3>User Growth</h3>
+                    <div className="placeholder-chart">Monthly User Growth Chart</div>
+                  </div>
+                  <div className="chart-container">
+                    <h3>Appointment Statistics</h3>
+                    <div className="placeholder-chart">Appointment Distribution</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {activeTab === 'complaints' && (
+            <div className="content-card">
+              <div className="card-header">
+                <h2>Complaint Management</h2>
+                <div className="filter-actions">
+                  <select className="status-filter">
+                    <option value="all">All Status</option>
+                    <option value="open">Open</option>
+                    <option value="in-progress">In Progress</option>
+                    <option value="resolved">Resolved</option>
+                  </select>
+                  <button className="export-button">
+                    <i className="fas fa-download"></i>
+                    Export
+                  </button>
+                </div>
+              </div>
+              <div className="card-content">
+                <table className="data-table">
+                  <thead>
+                    <tr>
+                      <th>ID</th>
+                      <th>User</th>
+                      <th>Subject</th>
+                      <th>Status</th>
+                      <th>Date</th>
+                      <th>Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>#C001</td>
+                      <td>Umesh</td>
+                      <td>Appointment Scheduling Issue</td>
+                      <td><span className="status-badge status-pending">Open</span></td>
+                      <td>2024-03-15</td>
+                      <td>
+                        <button className="view-details-btn">View</button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          )}
+
+          {activeTab === 'ai' && (
+            <div className="content-card">
+              <div className="card-header">
+                <h2>AI System Management</h2>
+                <button className="export-button">
+                  <i className="fas fa-cog"></i>
+                  Settings
+                </button>
+              </div>
+              <div className="card-content">
+                <div className="ai-management-grid">
+                  <div className="ai-metrics">
+                    <h3>Performance Metrics</h3>
+                    <div className="metrics-list">
+                      <div className="metric-item">
+                        <span>Response Accuracy</span>
+                        <div className="progress-bar">
+                          <div className="progress" style={{width: '89%'}}></div>
+                        </div>
+                        <span>89%</span>
+                      </div>
+                      <div className="metric-item">
+                        <span>Average Response Time</span>
+                        <div className="progress-bar">
+                          <div className="progress" style={{width: '95%'}}></div>
+                        </div>
+                        <span>1.2s</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="ai-training">
+                    <h3>Training Status</h3>
+                    <div className="training-info">
+                      <p>Last Updated: 2024-03-15 14:30</p>
+                      <p>Model Version: v2.3.0</p>
+                      <button className="ai-suggest-btn">
+                        <i className="fas fa-sync"></i>
+                        Update Model
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
         </div>
       </main>
     </div>
