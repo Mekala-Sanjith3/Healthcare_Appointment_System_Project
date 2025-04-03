@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { Button } from "../../common/Button/button";
-import { Input } from "../../common/Input/input";
+import { Link, useNavigate } from "react-router-dom";
+import { patientService } from "../../../services/api";
+import { toast } from "react-toastify";
 import "../../../styles/pages/patient/PatientLogin.css";
 
 const PatientLogin = () => {
@@ -14,157 +14,139 @@ const PatientLogin = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
 
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setCredentials({
+      ...credentials,
+      [name]: value
+    });
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
     setError("");
 
     try {
-      const response = await fetch('http://localhost:8080/api/patients/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(credentials),
-      });
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.message || 'Login failed');
+      const response = await patientService.login(credentials);
+      console.log('Login successful:', response.data);
+      
+      // Store token and user data in localStorage
+      localStorage.setItem('token', response.data.token);
+      localStorage.setItem('user', JSON.stringify(response.data.patient));
+      
+      toast.success('Login successful!');
+      navigate('/patient/dashboard');
+    } catch (error) {
+      console.error('Login error:', error);
+      
+      if (error.response && error.response.data && error.response.data.message) {
+        toast.error(error.response.data.message);
+      } else {
+        toast.error('Invalid email or password. Please try again.');
       }
-
-      // Store token in localStorage
-      localStorage.setItem('token', data.token);
-      localStorage.setItem('patientData', JSON.stringify(data.patient));
-
-      // Navigate to dashboard
-      navigate('/patient-dashboard');
-    } catch (err) {
-      setError(err.message);
     } finally {
       setIsLoading(false);
     }
   };
 
   return (
-    <div className="login-page">
-      <div className="login-wrapper">
-        <div className="login-left">
-          <div className="welcome-content">
-            <i className="fas fa-user-circle logo-icon"></i>
-            <h1>Welcome Back</h1>
-            <p>Access your healthcare portal for personalized care</p>
-          </div>
-          <div className="features">
-            <div className="feature-item">
-              <i className="fas fa-calendar-plus"></i>
-              <span>Book Appointments</span>
-            </div>
-            <div className="feature-item">
-              <i className="fas fa-video"></i>
-              <span>Telemedicine Services</span>
-            </div>
-            <div className="feature-item">
-              <i className="fas fa-robot"></i>
-              <span>AI Doctor Recommendations</span>
-            </div>
-          </div>
-        </div>
+    <div className="min-h-screen bg-gray-100 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+      <div className="sm:mx-auto sm:w-full sm:max-w-md">
+        <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
+          Patient Login
+        </h2>
+      </div>
 
-        <div className="login-right">
-          <div className="login-box">
-            <div className="login-header">
-              <h2>Patient Login</h2>
-              <p>Please enter your credentials</p>
-            </div>
-
-            <form onSubmit={handleSubmit}>
-              <div className="form-group">
-                <label htmlFor="email">
-                  <i className="fas fa-envelope"></i>
-                  Email Address
-                </label>
+      <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
+        <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
+          <form className="space-y-6" onSubmit={handleSubmit}>
+            <div>
+              <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+                Email address
+              </label>
+              <div className="mt-1">
                 <input
-                  type="email"
                   id="email"
-                  value={credentials.email}
-                  onChange={(e) =>
-                    setCredentials({ ...credentials, email: e.target.value })
-                  }
+                  name="email"
+                  type="email"
+                  autoComplete="email"
                   required
-                  placeholder="Enter your email"
+                  value={credentials.email}
+                  onChange={handleChange}
+                  className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                 />
               </div>
-
-              <div className="form-group">
-                <label htmlFor="password">
-                  <i className="fas fa-lock"></i>
-                  Password
-                </label>
-                <div className="password-input">
-                  <input
-                    type={showPassword ? "text" : "password"}
-                    id="password"
-                    value={credentials.password}
-                    onChange={(e) =>
-                      setCredentials({ ...credentials, password: e.target.value })
-                    }
-                    required
-                    placeholder="Enter your password"
-                  />
-                  <button
-                    type="button"
-                    className="toggle-password"
-                    onClick={() => setShowPassword(!showPassword)}
-                  >
-                    <i className={`fas ${showPassword ? "fa-eye-slash" : "fa-eye"}`}></i>
-                  </button>
-                </div>
-              </div>
-
-              <div className="form-options">
-                <label className="remember-me">
-                  <input type="checkbox" /> Remember me
-                </label>
-                <a href="#" className="forgot-password">
-                  Forgot Password?
-                </a>
-              </div>
-
-              <button 
-                type="submit" 
-                className={`login-button ${isLoading ? 'loading' : ''}`}
-                disabled={isLoading}
-              >
-                {isLoading ? (
-                  <>
-                    <span className="spinner"></span>
-                    Logging in...
-                  </>
-                ) : (
-                  <>
-                    <i className="fas fa-sign-in-alt"></i>
-                    Login
-                  </>
-                )}
-              </button>
-            </form>
-
-            <div className="login-footer">
-              <p>New patient?</p>
-              <button 
-                className="register-link"
-                onClick={() => navigate('/patient-register')}
-              >
-                <i className="fas fa-user-plus"></i>
-                Register Now
-              </button>
             </div>
 
-            <div className="security-note">
-              <i className="fas fa-shield-alt"></i>
-              <p>Your health information is protected by industry standard encryption</p>
+            <div>
+              <label htmlFor="password" className="block text-sm font-medium text-gray-700">
+                Password
+              </label>
+              <div className="mt-1">
+                <input
+                  id="password"
+                  name="password"
+                  type="password"
+                  autoComplete="current-password"
+                  required
+                  value={credentials.password}
+                  onChange={handleChange}
+                  className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                />
+              </div>
+            </div>
+
+            <div className="flex items-center justify-between">
+              <div className="flex items-center">
+                <input
+                  id="remember-me"
+                  name="remember-me"
+                  type="checkbox"
+                  className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
+                />
+                <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-900">
+                  Remember me
+                </label>
+              </div>
+
+              <div className="text-sm">
+                <a href="#" className="font-medium text-indigo-600 hover:text-indigo-500">
+                  Forgot your password?
+                </a>
+              </div>
+            </div>
+
+            <div>
+              <button
+                type="submit"
+                disabled={isLoading}
+                className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+              >
+                {isLoading ? 'Signing in...' : 'Sign in'}
+              </button>
+            </div>
+          </form>
+
+          <div className="mt-6">
+            <div className="relative">
+              <div className="absolute inset-0 flex items-center">
+                <div className="w-full border-t border-gray-300"></div>
+              </div>
+              <div className="relative flex justify-center text-sm">
+                <span className="px-2 bg-white text-gray-500">
+                  Don't have an account?
+                </span>
+              </div>
+            </div>
+
+            <div className="mt-6">
+              <Link
+                to="/patient/register"
+                className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-indigo-600 bg-white hover:bg-gray-50"
+              >
+                Register now
+              </Link>
             </div>
           </div>
         </div>

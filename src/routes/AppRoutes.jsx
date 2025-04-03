@@ -15,9 +15,9 @@ const AppRoutes = () => {
       <Route path="/" element={<HomePage />} />
       <Route path="/doctor-login" element={<DoctorLogin />} />
       <Route path="/doctor-dashboard" element={<DoctorDashboard />} />
-      <Route path="/patient-login" element={<PatientLogin />} />
-      <Route path="/patient-register" element={<PatientRegister />} />
-      <Route path="/patient-dashboard" element={<PatientDashboard />} />
+      <Route path="/patient/login" element={<PatientLogin />} />
+      <Route path="/patient/register" element={<PatientRegister />} />
+      <Route path="/patient/dashboard" element={<PatientDashboard />} />
       <Route path="/admin-login" element={<AdminLogin />} />
       <Route path="/admin-dashboard" element={<AdminDashboard />} />
     </Routes>
