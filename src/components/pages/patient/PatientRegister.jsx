@@ -1,9 +1,12 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import "../../../styles/pages/patient/PatientRegister.css";
 
 const PatientRegister = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const { userType = 'patient', title = 'Patient Registration' } = location.state || {};
+
   const [formData, setFormData] = useState({
     fullName: "",
     email: "",
@@ -13,6 +16,7 @@ const PatientRegister = () => {
     dateOfBirth: "",
     gender: "",
     address: "",
+    userType: userType // Add userType to form data
   });
 
   const [showPassword, setShowPassword] = useState(false);
@@ -72,18 +76,16 @@ const PatientRegister = () => {
       }
 
       const requestData = {
-        fullName: formData.fullName,
-        email: formData.email,
-        password: formData.password,
-        phoneNumber: formData.phoneNumber,
-        dateOfBirth: formData.dateOfBirth,
-        gender: formData.gender,
-        address: formData.address
+        ...formData,
+        userType: userType // Include userType in request
       };
 
-      console.log('Sending data:', requestData); // Debug log
+      // Update API endpoint based on user type
+      const endpoint = `http://localhost:8080/api/${userType}s/register`;
 
-      const response = await fetch('http://localhost:8080/api/patients/register', {
+      console.log('Sending data:', requestData);
+
+      const response = await fetch(endpoint, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -98,8 +100,8 @@ const PatientRegister = () => {
 
       const data = await response.json();
       localStorage.setItem('token', data.token);
-      localStorage.setItem('patientData', JSON.stringify(data.patient));
-      navigate('/patient-dashboard');
+      localStorage.setItem(`${userType}Data`, JSON.stringify(data[userType]));
+      navigate(`/${userType}-dashboard`);
     } catch (err) {
       setError(err.message);
       console.error('Registration error:', err);
@@ -136,7 +138,7 @@ const PatientRegister = () => {
         <div className="register-right">
           <div className="register-box">
             <div className="register-header">
-              <h2>Patient Registration</h2>
+              <h2>{title}</h2>
               <p>Step {step} of 2</p>
             </div>
 

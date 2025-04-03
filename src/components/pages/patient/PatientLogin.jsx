@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "../../common/Button/button";
 import { Input } from "../../common/Input/input";
+import ForgotPassword from "../../common/ForgotPassword/ForgotPassword";
 import "../../../styles/pages/patient/PatientLogin.css";
 
 const PatientLogin = () => {
@@ -13,6 +14,7 @@ const PatientLogin = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
+  const [showForgotPassword, setShowForgotPassword] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -127,9 +129,13 @@ const PatientLogin = () => {
                 <label className="remember-me">
                   <input type="checkbox" /> Remember me
                 </label>
-                <a href="#" className="forgot-password">
+                <button 
+                  type="button"
+                  className="forgot-password"
+                  onClick={() => setShowForgotPassword(true)}
+                >
                   Forgot Password?
-                </a>
+                </button>
               </div>
 
               <button 
@@ -169,6 +175,10 @@ const PatientLogin = () => {
           </div>
         </div>
       </div>
+
+      {showForgotPassword && (
+        <ForgotPassword onClose={() => setShowForgotPassword(false)} />
+      )}
     </div>
   );
 };

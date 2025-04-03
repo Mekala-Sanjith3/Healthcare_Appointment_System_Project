@@ -61,6 +61,7 @@
 .welcome-content h1 {
   font-size: 2.5rem;
   margin-bottom: 1rem;
+  color: var(--white);
 }
 
 .welcome-content p {
@@ -114,8 +115,9 @@
 
 .login-header h2 {
   font-size: 2rem;
-  color: var(--secondary-color);
+  color: #2c5282;
   margin-bottom: 0.5rem;
+  font-weight: 700;
 }
 
 .login-header p {
@@ -184,9 +186,20 @@
 }
 
 .forgot-password {
-  color: var(--primary-color);
+  color: #2c5282;
   text-decoration: none;
   font-size: 0.9rem;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transition: color 0.3s ease;
+  font-weight: 500;
+}
+
+.forgot-password:hover {
+  color: #1a365d;
+  text-decoration: underline;
 }
 
 .login-button {
@@ -237,18 +250,36 @@
   border-top: 1px solid var(--border-color);
 }
 
-.support-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  color: var(--primary-color);
-  text-decoration: none;
+.footer-actions {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
   margin-top: 0.5rem;
-  transition: var(--transition);
 }
 
-.support-link:hover {
-  color: var(--secondary-color);
+.support-link,
+.register-link {
+  background: none;
+  border: none;
+  color: #2c5282;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  padding: 8px 0;
+  transition: color 0.2s;
+  text-decoration: none;
+}
+
+.support-link:hover,
+.register-link:hover {
+  color: #1a365d;
+}
+
+.support-link i,
+.register-link i {
+  font-size: 16px;
 }
 
 .security-note {
@@ -302,4 +333,17 @@
     gap: 1rem;
     align-items: flex-start;
   }
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
 } 

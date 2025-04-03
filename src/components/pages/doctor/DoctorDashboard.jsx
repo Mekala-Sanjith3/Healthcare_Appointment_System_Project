@@ -59,6 +59,69 @@ const DoctorDashboard = () => {
     friday: { start: "09:00", end: "17:00", isAvailable: true }
   });
 
+  const [patientHistory, setPatientHistory] = useState([
+    {
+      id: 1,
+      name: "John Doe",
+      lastVisit: "2024-03-15",
+      condition: "Hypertension",
+      status: "Stable",
+      nextAppointment: "2024-04-01",
+      avatar: "https://ui-avatars.com/api/?name=John+Doe&background=random"
+    },
+    {
+      id: 2,
+      name: "Jane Smith",
+      lastVisit: "2024-03-10",
+      condition: "Diabetes",
+      status: "Improving",
+      nextAppointment: "2024-03-25",
+      avatar: "https://ui-avatars.com/api/?name=Jane+Smith&background=random"
+    }
+  ]);
+
+  const [schedules, setSchedules] = useState([
+    {
+      id: 1,
+      date: "2024-03-20",
+      time: "09:00 AM",
+      type: "Follow-up",
+      patient: "John Doe",
+      status: "Confirmed",
+      notes: "Blood pressure check"
+    },
+    {
+      id: 2,
+      date: "2024-03-20",
+      time: "10:30 AM",
+      type: "New Patient",
+      patient: "Alice Johnson",
+      status: "Pending",
+      notes: "Initial consultation"
+    }
+  ]);
+
+  const [reports, setReports] = useState([
+    {
+      id: 1,
+      patient: "John Doe",
+      type: "Lab Results",
+      date: "2024-03-18",
+      status: "Pending Review",
+      priority: "High",
+      category: "Blood Test"
+    },
+    {
+      id: 2,
+      patient: "Jane Smith",
+      type: "X-Ray",
+      date: "2024-03-17",
+      status: "Completed",
+      priority: "Medium",
+      category: "Radiology"
+    }
+  ]);
+
   const navigate = useNavigate();
 
   const handleTabChange = (tab) => {
@@ -193,12 +256,149 @@ const DoctorDashboard = () => {
           <div className="content-card">
             <div className="card-header">
               <h2>Patient History</h2>
-              <div className="search-bar">
-                <input type="text" placeholder="Search patients..." />
+              <div className="search-filter">
+                <input 
+                  type="text" 
+                  placeholder="Search patients..." 
+                  className="search-input"
+                />
+                <select className="filter-select">
+                  <option value="">All Conditions</option>
+                  <option value="Hypertension">Hypertension</option>
+                  <option value="Diabetes">Diabetes</option>
+                  <option value="Cardiac">Cardiac</option>
+                </select>
               </div>
             </div>
             <div className="patient-history-list">
-              {/* Patient history content */}
+              {patientHistory.map(patient => (
+                <div key={patient.id} className="patient-card">
+                  <div className="patient-info">
+                    <img src={patient.avatar} alt={patient.name} className="patient-avatar" />
+                    <div className="patient-details">
+                      <h3>{patient.name}</h3>
+                      <p className="condition">{patient.condition}</p>
+                    </div>
+                  </div>
+                  <div className="patient-status">
+                    <span className={`status-badge ${patient.status.toLowerCase()}`}>
+                      {patient.status}
+                    </span>
+                    <p className="last-visit">Last Visit: {patient.lastVisit}</p>
+                  </div>
+                  <div className="patient-actions">
+                    <button className="view-btn">
+                      <i className="fas fa-eye"></i>
+                      View Details
+                    </button>
+                    <button className="schedule-btn">
+                      <i className="fas fa-calendar-plus"></i>
+                      Schedule Follow-up
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        );
+
+      case 'schedule':
+        return (
+          <div className="content-card">
+            <div className="card-header">
+              <h2>Schedule Management</h2>
+              <div className="schedule-actions">
+                <button className="add-schedule-btn">
+                  <i className="fas fa-plus"></i>
+                  Add New Schedule
+                </button>
+                <button className="export-btn">
+                  <i className="fas fa-download"></i>
+                  Export Schedule
+                </button>
+              </div>
+            </div>
+            <div className="schedule-list">
+              {schedules.map(schedule => (
+                <div key={schedule.id} className="schedule-card">
+                  <div className="schedule-time">
+                    <span className="date">{schedule.date}</span>
+                    <span className="time">{schedule.time}</span>
+                  </div>
+                  <div className="schedule-details">
+                    <h3>{schedule.patient}</h3>
+                    <p className="type">{schedule.type}</p>
+                    <p className="notes">{schedule.notes}</p>
+                  </div>
+                  <div className="schedule-status">
+                    <span className={`status-badge ${schedule.status.toLowerCase()}`}>
+                      {schedule.status}
+                    </span>
+                    <div className="schedule-actions">
+                      <button className="edit-btn">
+                        <i className="fas fa-edit"></i>
+                      </button>
+                      <button className="cancel-btn">
+                        <i className="fas fa-times"></i>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        );
+
+      case 'reports':
+        return (
+          <div className="content-card">
+            <div className="card-header">
+              <h2>Reports & Documents</h2>
+              <div className="report-filters">
+                <select className="filter-select">
+                  <option value="">All Categories</option>
+                  <option value="Lab">Lab Results</option>
+                  <option value="Radiology">Radiology</option>
+                  <option value="Pathology">Pathology</option>
+                </select>
+                <select className="filter-select">
+                  <option value="">All Status</option>
+                  <option value="Pending">Pending Review</option>
+                  <option value="Completed">Completed</option>
+                </select>
+              </div>
+            </div>
+            <div className="reports-list">
+              {reports.map(report => (
+                <div key={report.id} className="report-card">
+                  <div className="report-header">
+                    <h3>{report.patient}</h3>
+                    <span className={`priority-badge ${report.priority.toLowerCase()}`}>
+                      {report.priority}
+                    </span>
+                  </div>
+                  <div className="report-details">
+                    <p className="type">{report.type}</p>
+                    <p className="category">{report.category}</p>
+                    <p className="date">Date: {report.date}</p>
+                  </div>
+                  <div className="report-status">
+                    <span className={`status-badge ${report.status.toLowerCase()}`}>
+                      {report.status}
+                    </span>
+                    <div className="report-actions">
+                      <button className="view-btn">
+                        <i className="fas fa-file-alt"></i>
+                        View Report
+                      </button>
+                      <button className="download-btn">
+                        <i className="fas fa-download"></i>
+                        Download
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
         );
