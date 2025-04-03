@@ -12,16 +12,39 @@ const PatientLogin = () => {
   });
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
-    
-    // Simulate API call
-    setTimeout(() => {
-      setIsLoading(false);
+    setError("");
+
+    try {
+      const response = await fetch('http://localhost:8080/api/patients/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(credentials),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.message || 'Login failed');
+      }
+
+      // Store token in localStorage
+      localStorage.setItem('token', data.token);
+      localStorage.setItem('patientData', JSON.stringify(data.patient));
+
+      // Navigate to dashboard
       navigate('/patient-dashboard');
-    }, 1500);
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -130,10 +153,13 @@ const PatientLogin = () => {
 
             <div className="login-footer">
               <p>New patient?</p>
-              <a href="#" className="register-link">
+              <button 
+                className="register-link"
+                onClick={() => navigate('/patient-register')}
+              >
                 <i className="fas fa-user-plus"></i>
                 Register Now
-              </a>
+              </button>
             </div>
 
             <div className="security-note">

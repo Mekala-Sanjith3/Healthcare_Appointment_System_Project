@@ -18,6 +18,29 @@
   --gradient-hover: linear-gradient(135deg, #2980b9, #2c3e50);
 }
 
+/* Add these styles to your PatientLogin.css file */
+.register-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background: none;
+  border: none;
+  color: #667eea;
+  font-weight: 500;
+  cursor: pointer;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.register-link:hover {
+  color: #5a6fd6;
+}
+
+.register-link i {
+  font-size: 1.1rem;
+}
+
 .login-page {
   min-height: 100vh;
   display: flex;
