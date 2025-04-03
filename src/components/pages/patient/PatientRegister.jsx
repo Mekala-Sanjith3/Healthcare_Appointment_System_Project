@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import "../../../styles/pages/patient/PatientRegister.css";
-import { patientService } from '../../../services/api';
 import { toast } from 'react-toastify';
+import { patientService } from '../../../services/api';
+import "../../../styles/pages/patient/PatientRegister.css";
 
 const PatientRegister = () => {
   const navigate = useNavigate();
@@ -18,13 +18,14 @@ const PatientRegister = () => {
     dateOfBirth: "",
     gender: "",
     address: "",
-    userType: userType // Add userType to form data
+    userType: userType
   });
 
   const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
-  const [step, setStep] = useState(1); // For multi-step form
+  const [step, setStep] = useState(1);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -90,49 +91,35 @@ const PatientRegister = () => {
       } else {
         toast.error('Registration failed. Please try again.');
       }
-
-      const requestData = {
-        ...formData,
-        userType: userType // Include userType in request
-      };
-
-      // Update API endpoint based on user type
-      const endpoint = `http://localhost:8080/api/${userType}s/register`;
-
-      console.log('Sending data:', requestData);
-
-      const response = await fetch(endpoint, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(requestData)
-      });
-
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.message || 'Registration failed');
-      }
-
-      const data = await response.json();
-      localStorage.setItem('token', data.token);
-      localStorage.setItem(`${userType}Data`, JSON.stringify(data[userType]));
-      navigate(`/${userType}-dashboard`);
-    } catch (err) {
-      setError(err.message);
-      console.error('Registration error:', err);
     } finally {
       setIsLoading(false);
     }
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
-      <div className="sm:mx-auto sm:w-full sm:max-w-md">
-        <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
-          Patient Registration
-        </h2>
-      </div>
+    <div className="register-page">
+      <div className="register-wrapper">
+        <div className="register-left">
+          <div className="welcome-content">
+            <i className="fas fa-user-plus logo-icon"></i>
+            <h1>Join Our Healthcare System</h1>
+            <p>Create your account to access personalized healthcare services</p>
+          </div>
+          <div className="features">
+            <div className="feature-item">
+              <i className="fas fa-calendar-check"></i>
+              <span>Easy Appointment Booking</span>
+            </div>
+            <div className="feature-item">
+              <i className="fas fa-file-medical"></i>
+              <span>Digital Medical Records</span>
+            </div>
+            <div className="feature-item">
+              <i className="fas fa-comments"></i>
+              <span>Direct Doctor Communication</span>
+            </div>
+          </div>
+        </div>
 
         <div className="register-right">
           <div className="register-box">
@@ -153,145 +140,217 @@ const PatientRegister = () => {
                 <i className="fas fa-exclamation-circle"></i>
                 {error}
               </div>
-            </div>
+            )}
 
-            <div>
-              <label htmlFor="email" className="block text-sm font-medium text-gray-700">
-                Email address
-              </label>
-              <div className="mt-1">
-                <input
-                  id="email"
-                  name="email"
-                  type="email"
-                  autoComplete="email"
-                  required
-                  value={formData.email}
-                  onChange={handleChange}
-                  className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                />
-              </div>
-            </div>
+            <form>
+              {step === 1 ? (
+                <>
+                  <div className="form-group">
+                    <label htmlFor="fullName">
+                      <i className="fas fa-user"></i>
+                      Full Name
+                    </label>
+                    <input
+                      type="text"
+                      id="fullName"
+                      name="fullName"
+                      value={formData.fullName}
+                      onChange={handleChange}
+                      required
+                      placeholder="Enter your full name"
+                    />
+                  </div>
 
-            <div>
-              <label htmlFor="password" className="block text-sm font-medium text-gray-700">
-                Password
-              </label>
-              <div className="mt-1">
-                <input
-                  id="password"
-                  name="password"
-                  type="password"
-                  autoComplete="new-password"
-                  required
-                  value={formData.password}
-                  onChange={handleChange}
-                  className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                />
-              </div>
-            </div>
+                  <div className="form-group">
+                    <label htmlFor="email">
+                      <i className="fas fa-envelope"></i>
+                      Email Address
+                    </label>
+                    <input
+                      type="email"
+                      id="email"
+                      name="email"
+                      value={formData.email}
+                      onChange={handleChange}
+                      required
+                      placeholder="Enter your email"
+                    />
+                  </div>
 
-            <div>
-              <label htmlFor="phoneNumber" className="block text-sm font-medium text-gray-700">
-                Phone Number
-              </label>
-              <div className="mt-1">
-                <input
-                  id="phoneNumber"
-                  name="phoneNumber"
-                  type="tel"
-                  required
-                  value={formData.phoneNumber}
-                  onChange={handleChange}
-                  className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                />
-              </div>
-            </div>
+                  <div className="form-group">
+                    <label htmlFor="password">
+                      <i className="fas fa-lock"></i>
+                      Password
+                    </label>
+                    <div className="password-input">
+                      <input
+                        type={showPassword ? "text" : "password"}
+                        id="password"
+                        name="password"
+                        value={formData.password}
+                        onChange={handleChange}
+                        required
+                        placeholder="Create a password"
+                      />
+                      <button
+                        type="button"
+                        className="toggle-password"
+                        onClick={() => setShowPassword(!showPassword)}
+                      >
+                        <i className={`fas ${showPassword ? "fa-eye-slash" : "fa-eye"}`}></i>
+                      </button>
+                    </div>
+                  </div>
 
-            <div>
-              <label htmlFor="dateOfBirth" className="block text-sm font-medium text-gray-700">
-                Date of Birth
-              </label>
-              <div className="mt-1">
-                <input
-                  id="dateOfBirth"
-                  name="dateOfBirth"
-                  type="date"
-                  required
-                  value={formData.dateOfBirth}
-                  onChange={handleChange}
-                  className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                />
-              </div>
-            </div>
+                  <div className="form-group">
+                    <label htmlFor="confirmPassword">
+                      <i className="fas fa-lock"></i>
+                      Confirm Password
+                    </label>
+                    <div className="password-input">
+                      <input
+                        type={showConfirmPassword ? "text" : "password"}
+                        id="confirmPassword"
+                        name="confirmPassword"
+                        value={formData.confirmPassword}
+                        onChange={handleChange}
+                        required
+                        placeholder="Confirm your password"
+                      />
+                      <button
+                        type="button"
+                        className="toggle-password"
+                        onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                      >
+                        <i className={`fas ${showConfirmPassword ? "fa-eye-slash" : "fa-eye"}`}></i>
+                      </button>
+                    </div>
+                  </div>
+                </>
+              ) : (
+                <>
+                  <div className="form-group">
+                    <label htmlFor="phoneNumber">
+                      <i className="fas fa-phone"></i>
+                      Phone Number
+                    </label>
+                    <input
+                      type="tel"
+                      id="phoneNumber"
+                      name="phoneNumber"
+                      value={formData.phoneNumber}
+                      onChange={handleChange}
+                      required
+                      placeholder="Enter your phone number"
+                    />
+                  </div>
 
-            <div>
-              <label htmlFor="gender" className="block text-sm font-medium text-gray-700">
-                Gender
-              </label>
-              <div className="mt-1">
-                <select
-                  id="gender"
-                  name="gender"
-                  required
-                  value={formData.gender}
-                  onChange={handleChange}
-                  className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                  <div className="form-group">
+                    <label htmlFor="dateOfBirth">
+                      <i className="fas fa-calendar"></i>
+                      Date of Birth
+                    </label>
+                    <input
+                      type="date"
+                      id="dateOfBirth"
+                      name="dateOfBirth"
+                      value={formData.dateOfBirth}
+                      onChange={handleChange}
+                      required
+                    />
+                  </div>
+
+                  <div className="form-group">
+                    <label htmlFor="gender">
+                      <i className="fas fa-venus-mars"></i>
+                      Gender
+                    </label>
+                    <select
+                      id="gender"
+                      name="gender"
+                      value={formData.gender}
+                      onChange={handleChange}
+                      required
+                    >
+                      <option value="">Select Gender</option>
+                      <option value="male">Male</option>
+                      <option value="female">Female</option>
+                      <option value="other">Other</option>
+                    </select>
+                  </div>
+
+                  <div className="form-group">
+                    <label htmlFor="address">
+                      <i className="fas fa-home"></i>
+                      Address
+                    </label>
+                    <textarea
+                      id="address"
+                      name="address"
+                      value={formData.address}
+                      onChange={handleChange}
+                      placeholder="Enter your address"
+                      rows="3"
+                    ></textarea>
+                  </div>
+                </>
+              )}
+
+              {step === 1 ? (
+                <button
+                  type="button"
+                  onClick={handleNextStep}
+                  className="next-button"
                 >
-                  <option value="">Select Gender</option>
-                  <option value="male">Male</option>
-                  <option value="female">Female</option>
-                  <option value="other">Other</option>
-                </select>
-              </div>
-            </div>
+                  <span>Next</span>
+                  <i className="fas fa-arrow-right"></i>
+                </button>
+              ) : (
+                <div className="button-group">
+                  <button
+                    type="button"
+                    onClick={() => setStep(1)}
+                    className="back-button"
+                  >
+                    <i className="fas fa-arrow-left"></i>
+                    <span>Back</span>
+                  </button>
+                  <button
+                    type="button"
+                    onClick={handleSubmit}
+                    disabled={isLoading}
+                    className={`register-button ${isLoading ? 'loading' : ''}`}
+                  >
+                    {isLoading ? (
+                      <>
+                        <span className="spinner"></span>
+                        Registering...
+                      </>
+                    ) : (
+                      <>
+                        <i className="fas fa-user-plus"></i>
+                        Register
+                      </>
+                    )}
+                  </button>
+                </div>
+              )}
+            </form>
 
-            <div>
-              <label htmlFor="address" className="block text-sm font-medium text-gray-700">
-                Address
-              </label>
-              <div className="mt-1">
-                <textarea
-                  id="address"
-                  name="address"
-                  rows="3"
-                  value={formData.address}
-                  onChange={handleChange}
-                  className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                ></textarea>
-              </div>
-            </div>
-
-            <div>
-              <button
-                type="submit"
-                disabled={isLoading}
-                className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+            <div className="register-footer">
+              <p>Already have an account?</p>
+              <button 
+                className="login-link"
+                onClick={() => navigate('/patient/login')}
               >
-                {isLoading ? 'Registering...' : 'Register'}
+                <i className="fas fa-sign-in-alt"></i>
+                Login Now
               </button>
             </div>
-          </form>
 
-          <div className="mt-6">
-            <div className="relative">
-              <div className="absolute inset-0 flex items-center">
-                <div className="w-full border-t border-gray-300"></div>
-              </div>
-              <div className="relative flex justify-center text-sm">
-                <span className="px-2 bg-white text-gray-500">
-                  Already have an account?
-                </span>
-              </div>
-            </div>
-
-            <div className="mt-6">
-              <Link
-                to="/patient/login"
-                className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-indigo-600 bg-white hover:bg-gray-50"
-              >
-                Sign in
-              </Link>
+            <div className="security-note">
+              <i className="fas fa-shield-alt"></i>
+              <p>Your information is secure and protected by our privacy policy</p>
             </div>
           </div>
         </div>

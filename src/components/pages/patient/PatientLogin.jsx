@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Button } from "../../common/Button/button";
-import { Input } from "../../common/Input/input";
-import ForgotPassword from "../../common/ForgotPassword/ForgotPassword";
+import { toast } from 'react-toastify';
+import { patientService } from '../../../services/api';
+import ITSupportPortal from "../../common/ITSupport/ITSupportPortal";
 import "../../../styles/pages/patient/PatientLogin.css";
 
 const PatientLogin = () => {
@@ -13,7 +13,7 @@ const PatientLogin = () => {
   });
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState("");
+  const [showSupportPortal, setShowSupportPortal] = useState(false);
   const [showForgotPassword, setShowForgotPassword] = useState(false);
 
   const handleChange = (e) => {
@@ -27,8 +27,7 @@ const PatientLogin = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
-    setError("");
-
+    
     try {
       const response = await patientService.login(credentials);
       console.log('Login successful:', response.data);
@@ -53,30 +52,51 @@ const PatientLogin = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
-      <div className="sm:mx-auto sm:w-full sm:max-w-md">
-        <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
-          Patient Login
-        </h2>
-      </div>
+    <div className="login-page">
+      <div className="login-wrapper">
+        <div className="login-left">
+          <div className="welcome-content">
+            <i className="fas fa-user-injured logo-icon"></i>
+            <h1>Welcome Back, Patient</h1>
+            <p>Access your healthcare portal to manage appointments and medical records</p>
+          </div>
+          <div className="features">
+            <div className="feature-item">
+              <i className="fas fa-calendar-check"></i>
+              <span>Book Appointments</span>
+            </div>
+            <div className="feature-item">
+              <i className="fas fa-file-medical"></i>
+              <span>View Medical Records</span>
+            </div>
+            <div className="feature-item">
+              <i className="fas fa-comments"></i>
+              <span>Consult with Doctors</span>
+            </div>
+          </div>
+        </div>
 
-      <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-        <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
-          <form className="space-y-6" onSubmit={handleSubmit}>
-            <div>
-              <label htmlFor="email" className="block text-sm font-medium text-gray-700">
-                Email address
-              </label>
-              <div className="mt-1">
+        <div className="login-right">
+          <div className="login-box">
+            <div className="login-header">
+              <h2>Patient Login</h2>
+              <p>Please enter your credentials</p>
+            </div>
+
+            <form onSubmit={handleSubmit}>
+              <div className="form-group">
+                <label htmlFor="email">
+                  <i className="fas fa-envelope"></i>
+                  Email Address
+                </label>
                 <input
+                  type="email"
                   id="email"
                   name="email"
-                  type="email"
-                  autoComplete="email"
-                  required
                   value={credentials.email}
                   onChange={handleChange}
-                  className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                  required
+                  placeholder="Enter your email"
                 />
               </div>
 
@@ -89,10 +109,9 @@ const PatientLogin = () => {
                   <input
                     type={showPassword ? "text" : "password"}
                     id="password"
+                    name="password"
                     value={credentials.password}
-                    onChange={(e) =>
-                      setCredentials({ ...credentials, password: e.target.value })
-                    }
+                    onChange={handleChange}
                     required
                     placeholder="Enter your password"
                   />
@@ -132,98 +151,81 @@ const PatientLogin = () => {
                 ) : (
                   <>
                     <i className="fas fa-sign-in-alt"></i>
-                    Login
+                    Login to Portal
                   </>
                 )}
               </button>
             </form>
 
             <div className="login-footer">
-              <p>New patient?</p>
-              <button 
-                className="register-link"
-                onClick={() => navigate('/patient-register')}
-              >
-                <i className="fas fa-user-plus"></i>
-                Register Now
-              </button>
-            </div>
-
-            <div>
-              <label htmlFor="password" className="block text-sm font-medium text-gray-700">
-                Password
-              </label>
-              <div className="mt-1">
-                <input
-                  id="password"
-                  name="password"
-                  type="password"
-                  autoComplete="current-password"
-                  required
-                  value={credentials.password}
-                  onChange={handleChange}
-                  className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                />
+              <p>New to our healthcare system?</p>
+              <div className="footer-actions">
+                <button 
+                  className="support-link"
+                  onClick={() => setShowSupportPortal(true)}
+                >
+                  <i className="fas fa-headset"></i>
+                  Need Help?
+                </button>
+                <button 
+                  className="register-link"
+                  onClick={() => navigate('/patient/register')}
+                >
+                  <i className="fas fa-user-plus"></i>
+                  Register Now
+                </button>
               </div>
             </div>
 
-            <div className="flex items-center justify-between">
-              <div className="flex items-center">
-                <input
-                  id="remember-me"
-                  name="remember-me"
-                  type="checkbox"
-                  className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
-                />
-                <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-900">
-                  Remember me
-                </label>
-              </div>
-
-              <div className="text-sm">
-                <a href="#" className="font-medium text-indigo-600 hover:text-indigo-500">
-                  Forgot your password?
-                </a>
-              </div>
-            </div>
-
-            <div>
-              <button
-                type="submit"
-                disabled={isLoading}
-                className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-              >
-                {isLoading ? 'Signing in...' : 'Sign in'}
-              </button>
-            </div>
-          </form>
-
-          <div className="mt-6">
-            <div className="relative">
-              <div className="absolute inset-0 flex items-center">
-                <div className="w-full border-t border-gray-300"></div>
-              </div>
-              <div className="relative flex justify-center text-sm">
-                <span className="px-2 bg-white text-gray-500">
-                  Don't have an account?
-                </span>
-              </div>
-            </div>
-
-            <div className="mt-6">
-              <Link
-                to="/patient/register"
-                className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-indigo-600 bg-white hover:bg-gray-50"
-              >
-                Register now
-              </Link>
+            <div className="security-note">
+              <i className="fas fa-shield-alt"></i>
+              <p>Secure login protected by industry standard encryption</p>
             </div>
           </div>
         </div>
       </div>
 
       {showForgotPassword && (
-        <ForgotPassword onClose={() => setShowForgotPassword(false)} />
+        <div className="modal-overlay">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h3>Reset Password</h3>
+              <button 
+                className="close-button"
+                onClick={() => setShowForgotPassword(false)}
+              >
+                <i className="fas fa-times"></i>
+              </button>
+            </div>
+            <div className="modal-body">
+              <p>Enter your email address and we'll send you a link to reset your password.</p>
+              <div className="form-group">
+                <input
+                  type="email"
+                  placeholder="Email address"
+                  className="modal-input"
+                />
+              </div>
+            </div>
+            <div className="modal-footer">
+              <button 
+                className="cancel-button"
+                onClick={() => setShowForgotPassword(false)}
+              >
+                Cancel
+              </button>
+              <button className="submit-button">
+                Send Reset Link
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {showSupportPortal && (
+        <div className="modal-overlay">
+          <ITSupportPortal onClose={() => setShowSupportPortal(false)} />
+        </div>
       )}
     </div>
   );
