@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { patientService } from "../../../services/api";
-import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
+import { Button } from "../../common/Button/button";
+import { Input } from "../../common/Input/input";
+import ForgotPassword from "../../common/ForgotPassword/ForgotPassword";
 import "../../../styles/pages/patient/PatientLogin.css";
 
 const PatientLogin = () => {
@@ -13,6 +14,7 @@ const PatientLogin = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
+  const [showForgotPassword, setShowForgotPassword] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -77,6 +79,74 @@ const PatientLogin = () => {
                   className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                 />
               </div>
+
+              <div className="form-group">
+                <label htmlFor="password">
+                  <i className="fas fa-lock"></i>
+                  Password
+                </label>
+                <div className="password-input">
+                  <input
+                    type={showPassword ? "text" : "password"}
+                    id="password"
+                    value={credentials.password}
+                    onChange={(e) =>
+                      setCredentials({ ...credentials, password: e.target.value })
+                    }
+                    required
+                    placeholder="Enter your password"
+                  />
+                  <button
+                    type="button"
+                    className="toggle-password"
+                    onClick={() => setShowPassword(!showPassword)}
+                  >
+                    <i className={`fas ${showPassword ? "fa-eye-slash" : "fa-eye"}`}></i>
+                  </button>
+                </div>
+              </div>
+
+              <div className="form-options">
+                <label className="remember-me">
+                  <input type="checkbox" /> Remember me
+                </label>
+                <button 
+                  type="button"
+                  className="forgot-password"
+                  onClick={() => setShowForgotPassword(true)}
+                >
+                  Forgot Password?
+                </button>
+              </div>
+
+              <button 
+                type="submit" 
+                className={`login-button ${isLoading ? 'loading' : ''}`}
+                disabled={isLoading}
+              >
+                {isLoading ? (
+                  <>
+                    <span className="spinner"></span>
+                    Logging in...
+                  </>
+                ) : (
+                  <>
+                    <i className="fas fa-sign-in-alt"></i>
+                    Login
+                  </>
+                )}
+              </button>
+            </form>
+
+            <div className="login-footer">
+              <p>New patient?</p>
+              <button 
+                className="register-link"
+                onClick={() => navigate('/patient-register')}
+              >
+                <i className="fas fa-user-plus"></i>
+                Register Now
+              </button>
             </div>
 
             <div>
@@ -151,6 +221,10 @@ const PatientLogin = () => {
           </div>
         </div>
       </div>
+
+      {showForgotPassword && (
+        <ForgotPassword onClose={() => setShowForgotPassword(false)} />
+      )}
     </div>
   );
 };

@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "../../common/Button/button";
 import { Input } from "../../common/Input/input";
+import ITSupportPortal from "../../common/ITSupport/ITSupportPortal";
+import ForgotPassword from "../../common/ForgotPassword/ForgotPassword";
 import "../../../styles/pages/doctor/DoctorLogin.css";
 
 const DoctorLogin = () => {
@@ -12,6 +14,8 @@ const DoctorLogin = () => {
   });
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [showSupportPortal, setShowSupportPortal] = useState(false);
+  const [showForgotPassword, setShowForgotPassword] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -104,9 +108,13 @@ const DoctorLogin = () => {
                 <label className="remember-me">
                   <input type="checkbox" /> Remember me
                 </label>
-                <a href="#" className="forgot-password">
+                <button 
+                  type="button"
+                  className="forgot-password"
+                  onClick={() => setShowForgotPassword(true)}
+                >
                   Forgot Password?
-                </a>
+                </button>
               </div>
 
               <button 
@@ -130,19 +138,46 @@ const DoctorLogin = () => {
 
             <div className="login-footer">
               <p>Need technical support?</p>
-              <a href="#" className="support-link">
-                <i className="fas fa-headset"></i>
-                Contact IT Support
-              </a>
+              <div className="footer-actions">
+                <button 
+                  className="support-link"
+                  onClick={() => setShowSupportPortal(true)}
+                >
+                  <i className="fas fa-headset"></i>
+                  Contact IT Support
+                </button>
+                <button 
+                  className="register-link"
+                  onClick={() => navigate('/patient-register', { 
+                    state: { 
+                      userType: 'doctor',
+                      title: 'Doctor Registration'
+                    }
+                  })}
+                >
+                  <i className="fas fa-user-plus"></i>
+                  Register Now
+                </button>
+              </div>
             </div>
-          </div>
 
-          <div className="security-note">
-            <i className="fas fa-shield-alt"></i>
-            <p>Secure login protected by industry standard encryption</p>
+            <div className="security-note">
+              <i className="fas fa-shield-alt"></i>
+              <p>Secure login protected by industry standard encryption</p>
+            </div>
           </div>
         </div>
       </div>
+
+      {showForgotPassword && (
+        <ForgotPassword onClose={() => setShowForgotPassword(false)} />
+      )}
+
+      {showSupportPortal && (
+        <div className="modal-overlay">
+          <ITSupportPortal onClose={() => setShowSupportPortal(false)} />
+        </div>
+      )}
     </div>
   );
 };

@@ -1,11 +1,14 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import "../../../styles/pages/patient/PatientRegister.css";
 import { patientService } from '../../../services/api';
 import { toast } from 'react-toastify';
 
 const PatientRegister = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const { userType = 'patient', title = 'Patient Registration' } = location.state || {};
+
   const [formData, setFormData] = useState({
     fullName: "",
     email: "",
@@ -15,6 +18,7 @@ const PatientRegister = () => {
     dateOfBirth: "",
     gender: "",
     address: "",
+    userType: userType // Add userType to form data
   });
 
   const [showPassword, setShowPassword] = useState(false);
@@ -86,6 +90,37 @@ const PatientRegister = () => {
       } else {
         toast.error('Registration failed. Please try again.');
       }
+
+      const requestData = {
+        ...formData,
+        userType: userType // Include userType in request
+      };
+
+      // Update API endpoint based on user type
+      const endpoint = `http://localhost:8080/api/${userType}s/register`;
+
+      console.log('Sending data:', requestData);
+
+      const response = await fetch(endpoint, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(requestData)
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message || 'Registration failed');
+      }
+
+      const data = await response.json();
+      localStorage.setItem('token', data.token);
+      localStorage.setItem(`${userType}Data`, JSON.stringify(data[userType]));
+      navigate(`/${userType}-dashboard`);
+    } catch (err) {
+      setError(err.message);
+      console.error('Registration error:', err);
     } finally {
       setIsLoading(false);
     }
@@ -99,23 +134,24 @@ const PatientRegister = () => {
         </h2>
       </div>
 
-      <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-        <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
-          <form className="space-y-6" onSubmit={handleSubmit}>
-            <div>
-              <label htmlFor="fullName" className="block text-sm font-medium text-gray-700">
-                Full Name
-              </label>
-              <div className="mt-1">
-                <input
-                  id="fullName"
-                  name="fullName"
-                  type="text"
-                  required
-                  value={formData.fullName}
-                  onChange={handleChange}
-                  className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                />
+        <div className="register-right">
+          <div className="register-box">
+            <div className="register-header">
+              <h2>{title}</h2>
+              <p>Step {step} of 2</p>
+            </div>
+
+            <div className="progress-bar">
+              <div 
+                className="progress" 
+                style={{ width: step === 1 ? '50%' : '100%' }}
+              ></div>
+            </div>
+
+            {error && (
+              <div className="error-message">
+                <i className="fas fa-exclamation-circle"></i>
+                {error}
               </div>
             </div>
 
