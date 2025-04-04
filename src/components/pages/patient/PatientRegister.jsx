@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { toast } from 'react-toastify';
-import { authService } from '../../../services/api';
+import { patientService } from '../../../services/api';
 import "../../../styles/pages/patient/PatientRegister.css";
 
 const PatientRegister = () => {
@@ -69,38 +69,30 @@ const PatientRegister = () => {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (!validateStep2()) return;
-    
+    if (e) e.preventDefault();
     setIsLoading(true);
+    setError("");
+    
     try {
-        // Ensure password is properly sent
-        const registrationData = {
-            ...formData,
-            password: formData.password.trim(), // Remove any whitespace
-            userType: 'PATIENT'
-        };
-        
-        console.log('Sending registration data:', {
-            ...registrationData,
-            password: '******' // Don't log actual password
-        });
-        
-        const response = await authService.registerPatient(registrationData);
-        
-        if (response.data?.token) {
-            localStorage.setItem('token', response.data.token);
-            localStorage.setItem('user', JSON.stringify(response.data.userData));
-            toast.success('Registration successful!');
-            navigate('/patient/dashboard');
-        } else {
-            throw new Error('Registration failed - no token received');
-        }
+      const response = await patientService.register(formData);
+      console.log('Registration successful:', response.data);
+      
+      // Store token and user data in localStorage
+      localStorage.setItem('token', response.data.token);
+      localStorage.setItem('user', JSON.stringify(response.data.patient));
+      
+      toast.success('Registration successful!');
+      navigate('/patient/dashboard');
     } catch (error) {
-        console.error('Registration error:', error);
-        toast.error(error.response?.data?.message || 'Registration failed. Please try again.');
+      console.error('Registration error:', error);
+      
+      if (error.response && error.response.data && error.response.data.message) {
+        toast.error(error.response.data.message);
+      } else {
+        toast.error('Registration failed. Please try again.');
+      }
     } finally {
-        setIsLoading(false);
+      setIsLoading(false);
     }
   };
 

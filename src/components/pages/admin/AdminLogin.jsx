@@ -4,8 +4,6 @@ import { Button } from "../../common/Button/button";
 import { Input } from "../../common/Input/input";
 import ITSupportPortal from "../../common/ITSupport/ITSupportPortal";
 import ForgotPassword from "../../common/ForgotPassword/ForgotPassword";
-import { toast } from 'react-toastify';
-import { authService } from '../../../services/api';
 import "../../../styles/pages/admin/AdminLogin.css";
 
 const AdminLogin = () => {
@@ -19,29 +17,15 @@ const AdminLogin = () => {
   const [showSupportPortal, setShowSupportPortal] = useState(false);
   const [showForgotPassword, setShowForgotPassword] = useState(false);
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setCredentials(prev => ({
-      ...prev,
-      [name]: value
-    }));
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-      const response = await authService.loginAdmin(credentials);
-      
-      if (response.data?.token) {
-        localStorage.setItem('token', response.data.token);
-        localStorage.setItem('user', JSON.stringify(response.data.userData));
-        toast.success('Login successful!');
-        navigate('/admin/dashboard');
-      }
-    } catch (error) {
-      console.error('Login error:', error);
-      toast.error(error.response?.data?.message || 'Login failed. Please try again.');
-    }
+    setIsLoading(true);
+    
+    // Simulate API call
+    setTimeout(() => {
+      setIsLoading(false);
+      navigate('/admin-dashboard');
+    }, 1500);
   };
 
   return (
@@ -73,7 +57,7 @@ const AdminLogin = () => {
           <div className="login-box">
             <div className="login-header">
               <h2>Admin Login</h2>
-              <p>Welcome back! Please login to your admin account</p>
+              <p>Please enter your credentials</p>
             </div>
 
             <form onSubmit={handleSubmit}>
@@ -85,9 +69,10 @@ const AdminLogin = () => {
                 <input
                   type="email"
                   id="email"
-                  name="email"
                   value={credentials.email}
-                  onChange={handleChange}
+                  onChange={(e) =>
+                    setCredentials({ ...credentials, email: e.target.value })
+                  }
                   required
                   placeholder="Enter your email"
                 />
@@ -102,9 +87,10 @@ const AdminLogin = () => {
                   <input
                     type={showPassword ? "text" : "password"}
                     id="password"
-                    name="password"
                     value={credentials.password}
-                    onChange={handleChange}
+                    onChange={(e) =>
+                      setCredentials({ ...credentials, password: e.target.value })
+                    }
                     required
                     placeholder="Enter your password"
                   />
@@ -151,7 +137,7 @@ const AdminLogin = () => {
             </form>
 
             <div className="login-footer">
-              <p>Need an admin account? <span onClick={() => navigate('/admin/register')} className="register-link">Register here</span></p>
+              <p>Need technical support?</p>
               <div className="footer-actions">
                 <button 
                   className="support-link"
@@ -159,6 +145,18 @@ const AdminLogin = () => {
                 >
                   <i className="fas fa-headset"></i>
                   Contact IT Support
+                </button>
+                <button 
+                  className="register-link"
+                  onClick={() => navigate('/patient-register', { 
+                    state: { 
+                      userType: 'admin',
+                      title: 'Admin Registration'
+                    }
+                  })}
+                >
+                  <i className="fas fa-user-plus"></i>
+                  Register Now
                 </button>
               </div>
             </div>

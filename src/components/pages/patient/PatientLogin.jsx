@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from 'react-toastify';
-import { authService } from '../../../services/api';
+import { patientService } from '../../../services/api';
 import ITSupportPortal from "../../common/ITSupport/ITSupportPortal";
 import "../../../styles/pages/patient/PatientLogin.css";
 
@@ -18,10 +18,10 @@ const PatientLogin = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setCredentials(prev => ({
-      ...prev,
+    setCredentials({
+      ...credentials,
       [name]: value
-    }));
+    });
   };
 
   const handleSubmit = async (e) => {
@@ -29,22 +29,23 @@ const PatientLogin = () => {
     setIsLoading(true);
     
     try {
-      console.log('Attempting login with:', credentials);
-      const response = await authService.loginPatient(credentials);
+      const response = await patientService.login(credentials);
+      console.log('Login successful:', response.data);
       
-      if (response.data && response.data.token) {
-        // Store token and user data
-        localStorage.setItem('token', response.data.token);
-        localStorage.setItem('user', JSON.stringify(response.data.userData));
-        
-        toast.success('Login successful!');
-        navigate('/patient/dashboard');
-      } else {
-        throw new Error('Invalid response from server');
-      }
+      // Store token and user data in localStorage
+      localStorage.setItem('token', response.data.token);
+      localStorage.setItem('user', JSON.stringify(response.data.patient));
+      
+      toast.success('Login successful!');
+      navigate('/patient/dashboard');
     } catch (error) {
       console.error('Login error:', error);
-      toast.error(error.response?.data?.message || 'Login failed. Please try again.');
+      
+      if (error.response && error.response.data && error.response.data.message) {
+        toast.error(error.response.data.message);
+      } else {
+        toast.error('Invalid email or password. Please try again.');
+      }
     } finally {
       setIsLoading(false);
     }
